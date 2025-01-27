@@ -1,0 +1,30 @@
+{
+  "name": "dat076-web-applications",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile" : "npx tsc && node ./dist/main.js",
+    "dev": "node ./node_modules/nodemon/bin/nodemon.js -e ts --exec \"npm run compile\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Idaaberg/DAT076-Web-Applications.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Idaaberg/DAT076-Web-Applications/issues"
+  },
+  "homepage": "https://github.com/Idaaberg/DAT076-Web-Applications#readme",
+  "description": "",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.10",
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.3"
+  }
+}
