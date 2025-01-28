@@ -26,12 +26,12 @@
 .rating > label:hover::before,
 .rating > label:hover ~ label::before {
     opacity: 1; 
-    color: #FFD700;
+    color: #ffb3f5;
 }
   
 .rating > input:checked ~ label::before {
     opacity: 1; 
-    color: #FFD700; 
+    color: #ffb3f5; 
 }
   
 .rating:hover > input:checked ~ label::before {
@@ -52,13 +52,14 @@
 }
 
 .pinkBtn {
-    border-color: #de1ef7;
+    border-color: #ff83d89f;
     background-color: #ffffff;
     color: #000000;
 }
 
 .pinkBtn:hover {
-    background-color: #de1ef7; 
+    background-color: #ff83cb; 
+    color: #ffffff;
 }
 
 .purpleBtn { 
