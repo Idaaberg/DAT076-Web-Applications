@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Billy's Books</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="main.css" />
+  <script src="https://kit.fontawesome.com/65ceeb28bd.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- Navbar  -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid justify-content-between">
+        <!-- Left Side: Brand -->
+      <a class="navbar-brand" href="#">BookShelf</a>
+        <!-- Center: Search Bar and Filter Button -->
+      <div class="d-flex align-items-center">
+        <form class="d-flex me-3" role="search">
+          <input id="searchBar" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn pinkBtn" type="button">Search</button>
+        </form>
+        <!-- Filter Button -->
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle pinkBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Want to Read</a></li>
+            <li><a class="dropdown-item" href="#">Currently Reading</a></li>
+            <li><a class="dropdown-item" href="#">Finished Reading</a></li>
+            <li><a class="dropdown-item" href="#">Rating</a></li>
+            <li><a class="dropdown-item" href="#">Author last name a-z</a></li>
+            <li><a class="dropdown-item" href="#">Title a-z</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Right Side: Dropdown and Add Book Button -->
+      <div class="d-flex align-items-center">
+        <!-- Add Book Button -->
+        <a href="AddBook.html">
+          <button class="btn btn-outline-success purpleBtn" type="button">Add Book</button>
+        </a>
+      </div>
+    </div>
+  </nav>
+    <!-- End of Navbar  -->
+
+    <!-- Book list  -->
+  <ul class="container text-center">
+    <li id="bookCardHeader" class="row bookCard mb-3 fw-bold">
+      <div class="col">Cover</div>
+      <div class="col">Title</div>
+      <div class="col">Author</div>
+      <div class="col">Status</div>
+    <div class="col">Rating</div>
+    </li>
+    <li class="row bookCard mb-3 align-items-center">
+      <div class="col"><img src="Images\finbok.jpg" alt="Image of book coverpage" width="100px" height="150px"></div>
+      <div class="col">really good, actually</div>
+      <div class="col">Heisey Monica</div>
+      <div class="col">Currently Reading</div>
+      <div class="col"></div>
+    </li>
+    <li class="row bookCard mb-3 align-items-center">
+      <div class="col"><img src="Images\finbok.jpg" alt="Image of book coverpage" width="100px" height="150px"></div>
+      <div class="col">really good, actually</div>
+      <div class="col">Heisey Monica</div>
+      <div class="col">Currently Reading</div>
+      <div class="col"></div>
+    </li>
+    <li class="row bookCard mb-3 align-items-center">
+      <div class="col"><img src="Images\finbok.jpg" alt="Image of book coverpage" width="100px" height="150px"></div>
+      <div class="col">really good, actually</div>
+      <div class="col">Heisey Monica</div>
+      <div class="col">Currently Reading</div>
+      <div class="col"></div>
+    </li>
+    <li class="row bookCard mb-3 align-items-center">
+      <div class="col"><img src="Images\finbok.jpg" alt="Image of book coverpage" width="100px" height="150px"></div>
+      <div class="col">really good, actually</div>
+      <div class="col">Heisey Monica</div>
+      <div class="col">Currently Reading</div>
+      <div class="col"></div>
+    </li>
+  </ul>
+  
+  <footer class="text-center"> 
+    Powered by Billy's Books
+  </footer>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

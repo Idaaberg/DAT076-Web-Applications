@@ -1,0 +1,76 @@
+.rating {
+    display: flex;
+    flex-direction: row-reverse; 
+    justify-content: center;
+}
+  
+.rating > input {
+    display: none;
+}
+  
+.rating > label {
+    position: relative;
+    width: 1.5em;
+    font-size: 2rem;
+    color: #ccc; 
+    cursor: pointer; 
+}
+  
+.rating > label::before {
+    content: "\2605"; 
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.2s; 
+}
+  
+.rating > label:hover::before,
+.rating > label:hover ~ label::before {
+    opacity: 1; 
+    color: #ffb3f5;
+}
+  
+.rating > input:checked ~ label::before {
+    opacity: 1; 
+    color: #ffb3f5; 
+}
+  
+.rating:hover > input:checked ~ label::before {
+    opacity: 0.4; 
+}
+
+
+.bookCard {
+    background-color: #faebfc;
+    border: 1px solid #000000; 
+    padding: 10px; 
+    border-radius: 8px; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#bookCardHeader {
+    background-color: #f3c0fa;
+}
+
+.pinkBtn {
+    border-color: #ff83d89f;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.pinkBtn:hover {
+    background-color: #ff83cb; 
+    color: #ffffff;
+}
+
+.purpleBtn { 
+    border-color: #80128e;
+    background-color: #ffffff;
+    color: #000000;}
+
+.purpleBtn:hover { 
+    background-color: #80128e;
+}
+
+#searchBar {
+    border-color: #de1ef7;
+}
