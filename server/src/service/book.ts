@@ -1,4 +1,3 @@
-import { promises } from 'dns';
 import { Book, BookState } from '../model/book.interface';
 
 export class BookService {
@@ -8,7 +7,14 @@ export class BookService {
         return JSON.parse(JSON.stringify(this.bookShelf));
     }
 
-    async addBook(title: string, author: string, state: BookState, rating: number, comment: string) : Promise<Book> {
+    static validateRating(rating?: number): rating is 1 | 2 | 3 | 4 | 5 | undefined {
+        return rating === undefined || [1, 2, 3, 4, 5].includes(rating);
+    }
+
+    async addBook(title: string, author: string, state: BookState, rating?: number, comment?: string) : Promise<Book> {
+        if (rating !== undefined && !BookService.validateRating(rating)) {
+            throw new Error("Invalid rating value");
+        }
         const newBook : Book = {
             id: Date.now(),
             title: title,
