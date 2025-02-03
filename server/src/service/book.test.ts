@@ -1,19 +1,64 @@
 import { BookState } from "../model/book.interface";
 import { BookService } from "./book";
 
-test("If a book is added to the list then it should be in the list", async () => {
-        const title = "Test Title";
-        const author = "Test Author";
+describe("BookService", () => {
+    let bookService: BookService;
+
+    //Initialize a new BookService instance before each test
+    beforeEach(() => {
+        bookService = new BookService(); 
+    });
+
+    // Helper function to add a book and return the list of books
+    const addAndFetchBooks = async (title: string, author: string, state: BookState, rating?: number, comment?: string) => {
+        await bookService.addBook(title, author, state, rating, comment);
+        return bookService.getBooks();
+    };
+
+    test("should add a book to the list", async () => {
+        const title = "Test Title1";
+        const author = "Test Author1";
         const state: BookState = BookState.HaveRead;
         const rating = 5;
-        const comment = "Test Comment";
-        const bookService = new BookService();
-        await bookService.addBook(title, author, state, rating, comment);
-        const books = await bookService.getBooks();
-        
-        expect(books.some((book) => book.title === title)).toBeTruthy();
-        expect(books.some((book) => book.author === author)).toBeTruthy();
-        expect(books.some((book) => book.state === state)).toBeTruthy();
-        expect(books.some((book) => book.rating === rating)).toBeTruthy();
-        expect(books.some((book) => book.comment === comment)).toBeTruthy();
-    })
+        const comment = "Test Comment1";
+
+        const books = await addAndFetchBooks(title, author, state, rating, comment);
+
+        // Assert that the book is added with all properties
+        const addedBook = books.find((book) => book.title === title);
+        expect(addedBook).toBeDefined();
+        expect(addedBook?.author).toBe(author);
+        expect(addedBook?.state).toBe(state);
+        expect(addedBook?.rating).toBe(rating);
+        expect(addedBook?.comment).toBe(comment);
+    });
+
+    test("should allow adding a book without a rating or comment", async () => {
+        const title = "Test Title2";
+        const author = "Test Author2";
+        const state: BookState = BookState.HaveRead;
+        const rating = undefined;
+        const comment = undefined;
+
+        const books = await addAndFetchBooks(title, author, state, rating, comment);
+
+        // Assert that the book is added with undefined rating and comment
+        const addedBook = books.find((book) => book.title === title);
+        expect(addedBook).toBeDefined();
+        expect(addedBook?.rating).toBeUndefined();
+        expect(addedBook?.comment).toBeUndefined();
+    });
+
+    test("should not allow rating to be negative", async () => {
+        const title = "Test Title3";
+        const author = "Test Author3";
+        const state: BookState = BookState.HaveRead;
+        const rating = -1;
+        const comment = undefined;
+
+        // Assert that the book is not added and an error is thrown
+        await expect(addAndFetchBooks(title, author, state, rating, comment))
+        .rejects
+        .toThrow("Invalid rating value"); 
+    });
+});
