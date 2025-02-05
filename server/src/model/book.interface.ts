@@ -11,4 +11,4 @@ export enum BookState {
     HaveRead = "have read",
     WantToRead = "want to read",
     Reading = "reading",
-  }
+}

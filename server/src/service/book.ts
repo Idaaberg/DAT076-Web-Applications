@@ -27,22 +27,20 @@ export class BookService {
         return {...newBook};
     }
 
-    async changeBookState(id: number, state: BookState) : Promise<Book | undefined> {
+    async editBookProps(id: number, title: string, author: string, state: BookState, rating: number, comment: string) : Promise<Book | undefined> {
         const book = this.bookShelf.find((book) => book.id === id);
         if (! book) {
             return undefined;
         }
+        book.title = title;
+        book.author = author;
         book.state = state;
+        if (BookService.validateRating(rating)) {
+            book.rating = rating;
+        } else {
+            throw new Error("Invalid rating value");
+        }
+        book.comment = comment;
         return {...book};
     }
-
-    // async setRating(id: number, rating: number) :Promise<Book | undefined> {
-    //     const book = this.bookShelf.find((book) => book.id === id);
-    //     if (! book) {
-    //         return undefined;
-    //     }
-    //     if(book.state === BookState.HaveRead) {
-    //         book.rating = rating;
-    //     }
-    // }
 }

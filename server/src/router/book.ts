@@ -40,16 +40,17 @@ bookRouter.post("/", async (
 });
 
 bookRouter.patch("/:id", async (
-    req: Request<{ id: string }, {}, { state: BookState }>,
+    req: Request<{ id: string }, {}, {title: string, author: string, state: BookState, rating: number, comment: string}>,
     res: Response<Book | string>
 ) => {
     
     try {
-        const { state } = req.body;
+        const { title,author,state,rating,comment } = req.body;
         if (req.params.id == null) {
             res.status(400).send(`Missing id param`);
             return;
         }
+
     if (!Object.values(BookState).includes(state)) {
         res.status(400).send(`Field 'state' must be a BookState`);
      return;
@@ -62,14 +63,14 @@ bookRouter.patch("/:id", async (
         return;
     }
 
-    const stateChange = await bookService.changeBookState(index, state);
+    const stateChange = await bookService.editBookProps(index, title, author, state, rating, comment);
 
     if (!stateChange) {
         res.status(404).send(`No book with index ${index}`)
         return;
     }
 
-    res.status(200).send(`Book changed state to ${state}`);
+    res.status(200).send(`Book has been edited!`);
 
     } catch (e: any) {
         res.status(500).send(e.message);

@@ -61,4 +61,39 @@ describe("BookService", () => {
         .rejects
         .toThrow("Invalid rating value"); 
     });
+
+    test("should edit the book properties", async () => {
+        const title = "Test Title5";
+        const author = "Test Author5";
+        const state: BookState = BookState.HaveRead;
+        const rating = 5;
+        const comment = "Test Comment5";
+
+        const books = await addAndFetchBooks(title, author, state, rating, comment);
+        const book = books.find((book) => book.title === title);
+
+        // Assert that the book is added with all properties
+        expect(book).toBeDefined();
+        expect(book?.author).toBe(author);
+        expect(book?.state).toBe(state);
+        expect(book?.rating).toBe(rating);
+        expect(book?.comment).toBe(comment);
+
+        // Edit the book properties
+        const newTitle = "New Title";
+        const newAuthor = "New Author";
+        const newState: BookState = BookState.WantToRead;
+        const newRating = 4;
+        const newComment = "New Comment";
+
+        const editedBook = await bookService.editBookProps(book!.id, newTitle, newAuthor, newState, newRating, newComment);
+
+        // Assert that the book properties are edited
+        expect(editedBook).toBeDefined();
+        expect(editedBook?.title).toBe(newTitle);
+        expect(editedBook?.author).toBe(newAuthor);
+        expect(editedBook?.state).toBe(newState);
+        expect(editedBook?.rating).toBe(newRating);
+        expect(editedBook?.comment).toBe(newComment);
+    });
 });
