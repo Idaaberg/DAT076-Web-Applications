@@ -16,11 +16,11 @@ describe("BookService", () => {
     };
 
     test("should add a book to the list", async () => {
-        const title = "Test Title1";
-        const author = "Test Author1";
+        const title = "Test Title";
+        const author = "Test Author";
         const state: BookState = BookState.HaveRead;
         const rating = 5;
-        const comment = "Test Comment1";
+        const comment = "Test Comment";
 
         const books = await addAndFetchBooks(title, author, state, rating, comment);
 
@@ -34,8 +34,8 @@ describe("BookService", () => {
     });
 
     test("should allow adding a book without a rating or comment", async () => {
-        const title = "Test Title2";
-        const author = "Test Author2";
+        const title = "Test Title";
+        const author = "Test Author";
         const state: BookState = BookState.HaveRead;
         const rating = undefined;
         const comment = undefined;
@@ -50,8 +50,8 @@ describe("BookService", () => {
     });
 
     test("should not allow rating to be negative", async () => {
-        const title = "Test Title3";
-        const author = "Test Author3";
+        const title = "Test Title";
+        const author = "Test Author";
         const state: BookState = BookState.HaveRead;
         const rating = -1;
         const comment = undefined;
@@ -63,11 +63,11 @@ describe("BookService", () => {
     });
 
     test("should edit the book properties", async () => {
-        const title = "Test Title5";
-        const author = "Test Author5";
+        const title = "Test Title";
+        const author = "Test Author";
         const state: BookState = BookState.HaveRead;
         const rating = 5;
-        const comment = "Test Comment5";
+        const comment = "Test Comment";
 
         const books = await addAndFetchBooks(title, author, state, rating, comment);
         const book = books.find((book) => book.title === title);
