@@ -11,7 +11,13 @@ export class BookService {
         return rating === undefined || [1, 2, 3, 4, 5].includes(rating);
     }
 
-    async addBook(title: string, author: string, state: BookState, rating?: number, comment?: string) : Promise<Book> {
+    async addBook(
+        title: string,
+        author: string,
+        state: BookState,
+        rating?: number | undefined,
+        comment?: string | undefined
+    ): Promise<Book | string> {
         if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }

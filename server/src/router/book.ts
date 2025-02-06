@@ -19,21 +19,25 @@ bookRouter.get("/", async (
 });
 
 bookRouter.post("/", async (
-    req: Request<{}, {}, {title: string, author: string, state: BookState, rating: number, comment: string}>,
+    req: Request<{}, {}, {title: string, author: string, state: BookState, rating?: number | undefined, comment?: string | undefined}>,
     res: Response<Book | string>
 ) => {
     try {
         const { title, author, state, rating, comment } = req.body;
-        if (typeof title !== "string" ||
-            typeof author !== "string" ||
-            !Object.values(BookState).includes(state) ||
-            typeof rating !== "number" ||
-            typeof comment !== "string"
-        ){
-            res.status(400).send(`Invalid input`);
-        } else {
-            const newBook = await bookService.addBook(title, author, state, rating, comment);
-            res.status(201).send(newBook);}
+        if (!title || !author || !state){
+            res.status(400).send("Title, author, and state are required fields.");
+            return;
+        }
+        if (!Object.values(BookState).includes(state)) {
+            res.status(400).send(`Field 'state' must be a valid BookState.`);
+            return;
+        }
+        if (rating !== undefined && !BookService.validateRating(rating)) {
+            res.status(400).send("Invalid rating value.");
+            return;
+        }
+        const newBook = await bookService.addBook(title, author, state, rating, comment);
+        res.status(201).send(newBook);
     } catch (e: any) {
         res.status(500).send(e.message);
     }
@@ -43,35 +47,27 @@ bookRouter.patch("/:id", async (
     req: Request<{ id: string }, {}, {title: string, author: string, state: BookState, rating: number, comment: string}>,
     res: Response<Book | string>
 ) => {
-    
     try {
         const { title,author,state,rating,comment } = req.body;
         if (req.params.id == null) {
             res.status(400).send(`Missing id param`);
             return;
         }
-
-    if (!Object.values(BookState).includes(state)) {
-        res.status(400).send(`Field 'state' must be a BookState`);
-     return;
-    }
-
-    const index = parseInt(req.params.id, 10);
-
-    if (! (index >= 0)) {
-        res.status(400).send(`id number must be a non-negative integer`);
+        if (!Object.values(BookState).includes(state)) {
+            res.status(400).send(`Field 'state' must be a BookState`);
         return;
-    }
-
-    const stateChange = await bookService.editBookProps(index, title, author, state, rating, comment);
-
-    if (!stateChange) {
-        res.status(404).send(`No book with index ${index}`)
-        return;
-    }
-
-    res.status(200).send(`Book has been edited!`);
-
+        }
+        const index = parseInt(req.params.id, 10);
+        if (! (index >= 0)) {
+            res.status(400).send(`id number must be a non-negative integer`);
+            return;
+        }
+        const stateChange = await bookService.editBookProps(index, title, author, state, rating, comment);
+        if (!stateChange) {
+            res.status(404).send(`No book with index ${index}`)
+            return;
+        }
+        res.status(200).send(`Book has been edited!`);
     } catch (e: any) {
         res.status(500).send(e.message);
     }
