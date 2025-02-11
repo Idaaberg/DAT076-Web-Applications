@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile" : "npx tsc && node ./dist/main.js",
-    "dev": "node ./node_modules/nodemon/bin/nodemon.js -e ts --exec \"npm run compile\""
+    "test": "jest",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only server/src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -19,12 +18,24 @@
   "homepage": "https://github.com/Idaaberg/DAT076-Web-Applications#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "react-bootstrap": "^2.10.9"
   },
   "devDependencies": {
+    "@types/axios": "^0.9.36",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
-    "@types/node": "^22.10.10",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.0",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.5",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.3"
   }
 }
