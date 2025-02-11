@@ -5,38 +5,40 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.bookCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 30px;
+  background-color: #faebfc;
+  border: 1px solid #000000; 
+  border-radius: 8px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #000000;
+  width: 800px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.bookShelfHeader {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #faebfc;
+  padding: 30px;
+  border: 1px solid #000000; 
+  border-radius: 8px; 
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #000000;
+  width: 800px;
 }
 
-.card {
-  padding: 2em;
+.book-image {
+  margin-right: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+.book-info {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  width: 100%;
 }
+
