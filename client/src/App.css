@@ -5,7 +5,14 @@
   text-align: center;
 }
 
-.bookCard {
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* BookShelf Component */
+.bookCard, .bookShelfHeader  {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -15,30 +22,21 @@
   border-radius: 8px; 
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   color: #000000;
-  width: 800px;
+  width: 1000px;
 }
 
 .bookShelfHeader {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #faebfc;
-  padding: 30px;
-  border: 1px solid #000000; 
-  border-radius: 8px; 
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-  color: #000000;
-  width: 800px;
+  font-weight: bold;
 }
 
 .book-image {
-  margin-right: 15px;
+  margin-left: 40px;
 }
 
 .book-info {
   display: flex;
   flex-grow: 1;
-  justify-content: space-between;
+  padding: 30px;
+  justify-content: space-around;
   width: 100%;
 }
-

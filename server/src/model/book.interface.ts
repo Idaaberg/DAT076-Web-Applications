@@ -3,12 +3,12 @@ export interface Book {
     title: string;
     author: string;
     state: BookState;
-    rating?: 1 | 2 | 3 | 4 | 5;
+    rating?: 0 | 1 | 2 | 3 | 4 | 5;
     comment?: string;
 }
 
 export enum BookState {
-    HaveRead = "have read",
-    WantToRead = "want to read",
-    Reading = "reading",
+    HaveRead = "Have Read",
+    WantToRead = "Want to Read",
+    Reading = "Reading",
 }
