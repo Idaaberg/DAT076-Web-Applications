@@ -1,4 +1,4 @@
-import { Book } from './api';
+import { Book } from '../api';
 import { BookComponent } from './Book';
 
 export function BookShelfComponent({ books }: { books : Book[]}) {

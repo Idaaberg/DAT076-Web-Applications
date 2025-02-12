@@ -21,3 +21,8 @@ export async function getBooks(): Promise<Book[]> {
   const response = await axios.get<Book[]>(`${BASE_URL}/book`)
   return response.data
 }
+
+export async function addBook(title: string, author: string, state: BookState, rating?: number, comment?: string): Promise<Book> {
+  const response = await axios.post<Book>(`${BASE_URL}/book`, { title, author, state, rating, comment })
+  return response.data
+}

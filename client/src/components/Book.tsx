@@ -1,5 +1,5 @@
-import { Book } from './api';
-import defaultImage from './img/default.jpg';
+import { Book } from '../api';
+import defaultImage from '../img/default.jpg';
 
 
 export function BookComponent({ book }: { book : Book}) {

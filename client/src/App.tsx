@@ -1,33 +1,17 @@
-import { useEffect, useState } from 'react'
 import './App.css'
-import { Book, BookState, getBooks } from './api'
-import { BookComponent } from './Book'
-import { BookShelfComponent } from './BookShelf'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import Home from './pages/home'
+import AddBook from './pages/addBook';
 
 function App() {
-
-  const [books, setBooks] = useState<Book[]>([])
-
-  useEffect(() => {
-    async function loadBooks() {
-      const bs = await getBooks();  
-      setBooks(bs);  
-    }
-    loadBooks(); 
-  }, []);
-
   
   return(
-    <>
-    <h1>Book Shelf</h1>
-    {books.length > 0 ? (
-      <section data-testid="book-container">
-        <BookShelfComponent books={books} />
-      </section>
-    ) : (
-      <em>No books available</em>
-    )}
-  </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/add" element={<AddBook />} />
+      </Routes>
+    </Router>
 );
 }
 export default App
