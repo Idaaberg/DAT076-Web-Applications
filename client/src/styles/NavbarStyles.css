@@ -1,3 +1,8 @@
+nav {
+    position: sticky;
+    top: 0;
+}
+
 .bar {
     border: 1px solid #ffffff; 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -6,6 +11,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: #282424;
 }
 
 .logo {

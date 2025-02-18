@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { NavbarComponent } from "../components/NavBar"
 import { Book, getBooks } from '../api'
 import { BookShelfComponent } from '../components/BookShelf'
+import "../App.css"
 
 function Home() {
 
@@ -17,14 +18,16 @@ function Home() {
 
     return (
         <>
-        <NavbarComponent /> 
-        {books.length > 0 ? (
-        <section data-testid="book-container">
-            <BookShelfComponent books={books} />
-        </section>
-        ) : (
-        <em>No books available</em>
-        )}
+        <div className="home">
+            <NavbarComponent /> 
+            {books.length > 0 ? (
+            <section data-testid="book-container">
+                <BookShelfComponent books={books} />
+            </section>
+            ) : (
+            <em>No books available</em>
+            )}
+        </div>
     </>
 );
 }

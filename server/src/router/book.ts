@@ -7,7 +7,7 @@ const bookService = new BookService();
 export const bookRouter = express.Router();
 
 bookRouter.get("/", async (
-    req: Request<{},{},{}>,
+    req: Request<{}, {}, {}>,
     res: Response<Array<Book> | string>
 ) => {
     try {
@@ -15,6 +15,19 @@ bookRouter.get("/", async (
         res.status(200).send(bookShelf);
     } catch (e: any) {
         res.status(500).send(e.message);
+    }
+});
+
+bookRouter.get('/:id', async (
+    req: Request<{ id: string }, {}, {}>,
+    res: Response<Book | string>
+) => {
+    try {
+        const id = Number(req.params.id); 
+        const book = await bookService.getBookById(id);
+        res.status(200).send(book);
+    } catch (e: any) {
+        res.status(500).json(e.message);
     }
 });
 

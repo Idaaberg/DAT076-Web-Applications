@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Rating from '@mui/material/Rating';
 
@@ -11,10 +10,18 @@ export function RatingComponent({ value, onChange }: RatingComponentProps) {
   return (
     <Box sx={{ '& > legend': { mt: 2 } }}>
       <Rating
-        name="simple-controlled"
-        value={value ?? undefined} // Fallback to undefined if value is null
-        onChange={(event, newValue) => {
-          onChange(newValue ?? null); // Convert undefined back to null for the parent
+        name="pink-rating"
+        value={value ?? undefined}
+        onChange={(_, newValue) => {
+          onChange(newValue ?? null);
+        }}
+        sx={{
+          '& .MuiRating-iconFilled': {
+            color: '#ff69b4',
+          },
+          '& .MuiRating-iconEmpty': {
+            color: '#ff69b4',
+          },
         }}
       />
     </Box>

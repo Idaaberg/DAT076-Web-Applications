@@ -1,4 +1,4 @@
-import '../styles/AddBook.css';
+import '../styles/Form.css';
 import { RatingComponent } from '../components/Rating';
 import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
@@ -17,9 +17,8 @@ function AddBook() {
     e.preventDefault();
 
     try {
-      // Convert `rating` from null to undefined before calling addBook
       await addBook(title, author, state, rating ?? undefined, comment);
-      navigate("/"); // Navigate back to the home page after successful submission
+      navigate("/"); 
     } catch (error) {
       console.error("Error adding book:", error);
     }
@@ -29,7 +28,7 @@ function AddBook() {
     <>
       <header>
         <Link to="/">
-          <HomeIcon className="homeIcon" />
+          <HomeIcon className="homeIcon" sx={{ color: '#ff69b4' }} fontSize="large"/>
         </Link>
         <h2 className="addBookHeader">Add Book</h2>
       </header>

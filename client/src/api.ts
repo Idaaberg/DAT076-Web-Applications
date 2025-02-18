@@ -22,7 +22,20 @@ export async function getBooks(): Promise<Book[]> {
   return response.data
 }
 
+export async function getBookById(id: string): Promise<Book | null> {
+  console.log("i GetBookById API")
+  const response = await axios.get<Book>(`${BASE_URL}/book/${id}`)
+  console.log("i GetBookById 2")
+
+  return response.data;
+}
+
 export async function addBook(title: string, author: string, state: BookState, rating?: number, comment?: string): Promise<Book> {
   const response = await axios.post<Book>(`${BASE_URL}/book`, { title, author, state, rating, comment })
+  return response.data
+}
+
+export async function editBook(id: number, title: string, author: string, state: BookState, rating?: number, comment?: string): Promise<Book> {
+  const response = await axios.patch<Book>(`${BASE_URL}/book/${id}`, { title, author, state, rating, comment })
   return response.data
 }

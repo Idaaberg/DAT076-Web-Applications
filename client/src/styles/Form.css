@@ -14,8 +14,6 @@
     color: #ff83cb !important;
 }
 
-
-
 .form-group {
     width: 100%;
     max-width: 500px;
@@ -23,7 +21,6 @@
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .form-group label {
     display: block;
@@ -107,4 +104,8 @@
     margin-top: 20px;
     font-size: 28px;
     color: #343a40;
+}
+
+.homeIcon {
+    padding:6px;
 }

@@ -7,6 +7,10 @@ export class BookService {
         return JSON.parse(JSON.stringify(this.bookShelf));
     }
 
+    async getBookById(id: number): Promise<Book | undefined> {
+        return this.bookShelf.find((book) => book.id === id);
+    }
+
     static validateRating(rating?: number): rating is 1 | 2 | 3 | 4 | 5 | undefined {
         return rating === undefined || [1, 2, 3, 4, 5].includes(rating);
     }

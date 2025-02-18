@@ -1,44 +1,43 @@
-import { Link } from 'react-router-dom';
 import '../styles/NavbarStyles.css';
 
 
 export function NavbarComponent() {
-  return (
-    <nav>
-        <div className="bar">
-            <h3 className='logo'>BookShelf</h3>
+    return (
+        <nav>
+            <div className="bar">
+                <h3 className='logo'>BookShelf</h3>
 
-            <div className='searchFilter'>
-                <form className="searchArea" role="search">
-                    <input id="searchBar" className="searchbar" type="search" placeholder="Search" aria-label="Search" />
-                    <button className="searchBtn" type="button">Search</button>
-                </form>
+                <div className='searchFilter'>
+                    <form className="searchArea" role="search">
+                        <input id="searchBar" className="searchbar" type="search" placeholder="Search" aria-label="Search" />
+                        <button className="searchBtn" type="button">Search</button>
+                    </form>
 
-                <div className="dropdown">
-                    <button className="filterBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filter
-                    </button>
-                    <ul className="dropdownMenu">
-                        {/* <li><a className="dropdown-item" href="#">Want to Read</a></li>
+                    <div className="dropdown">
+                        <button className="filterBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </button>
+                        <ul className="dropdownMenu">
+                            {/* <li><a className="dropdown-item" href="#">Want to Read</a></li>
                         <li><a className="dropdown-item" href="#">Currently Reading</a></li>
                         <li><a className="dropdown-item" href="#">Finished Reading</a></li>
                         <li><a className="dropdown-item" href="#">Rating</a></li>
                         <li><a className="dropdown-item" href="#">Author last name a-z</a></li>
                         <li><a className="dropdown-item" href="#">Title a-z</a></li> */}
-                    </ul>
+                        </ul>
+                    </div>
+                </div>
+                <div className='addBook'>
+                    <a href="/add">
+                        <button className="addBtn" type="button">Add Book</button>
+                    </a>
                 </div>
             </div>
-            <div className='addBook'>
-                <Link to="/add">
-                    <button className="addBtn" type="button">Add Book</button>
-                </Link>
-            </div>
-        </div>
-    </nav>
-  );
+        </nav>
+    );
 }
 
- {/* <nav class="navbar navbar-expand-lg bg-body-tertiary">
+{/* <nav class="navbar navbar-expand-lg bg-body-tertiary">
      <div class="container-fluid justify-content-between">
          <!-- Left Side: Brand -->
 //       <a class="navbar-brand" href="#">BookShelf</a>

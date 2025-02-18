@@ -1,9 +1,9 @@
 import { Book } from '../api';
 import { BookComponent } from './Book';
 
-export function BookShelfComponent({ books }: { books : Book[]}) {
+export function BookShelfComponent({ books }: { books: Book[] }) {
     return (
-        <div> 
+        <div className="bookShelf">
             <ul className="bookShelfHeader">
                 <div>Cover</div>
                 <div>Title</div>
