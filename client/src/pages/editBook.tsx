@@ -1,6 +1,6 @@
 import '../styles/Form.css';
 import { RatingComponent } from '../components/Rating';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import { Book, BookState, editBook, getBookById } from '../api';
 import { useEffect, useState } from 'react';
@@ -37,9 +37,9 @@ function EditBook() {
     return (
         <>
             <header>
-                <Link to="/">
+                <a href="/">
                     <HomeIcon className="homeIcon" sx={{ color: '#ff69b4' }} fontSize="large"/>
-                </Link>
+                </a>
                 <h2 className="addBookHeader">Edit Book</h2>
             </header>
             <main className="addBookMain">
@@ -98,11 +98,11 @@ function EditBook() {
                         <button className="submitBtn" type="submit">
                             Save changes
                         </button>
-                        <Link to="/">
+                        <a href="/">
                             <button className="cancelBtn" type="button">
                                 Cancel
                             </button>
-                        </Link>
+                        </a>
                     </div>
                 </form>
             </main>

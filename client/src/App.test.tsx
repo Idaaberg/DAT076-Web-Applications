@@ -10,4 +10,10 @@ describe('Home Component', () => {
     const button = screen.getByRole('button', { name: "Add Book" });
     expect(button).toBeInTheDocument();
   });
+
+  test('renders empty message initially', () => {
+    render(<Home />);
+    const emptyMsg = screen.getByText("No books available");
+    expect(emptyMsg).toBeInTheDocument();
+  });
 });

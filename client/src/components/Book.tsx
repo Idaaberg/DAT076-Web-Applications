@@ -1,5 +1,4 @@
 import { Book } from '../api';
-import { Link } from 'react-router-dom';
 import defaultImage from '../img/default.jpg';
 
 
