@@ -20,7 +20,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 30px;
+  padding: 20px;
   background-color: #faebfc;
   border: 1px solid #000000; 
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -30,6 +30,8 @@ ul {
 
 .bookShelfHeader {
   font-weight: bold;
+  padding: 5px;
+  background-color: #e5cae3;
 }
 
 .book-image {

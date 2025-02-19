@@ -27,6 +27,7 @@ nav {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 }
 
 .searchBar {
@@ -38,4 +39,19 @@ nav {
 
 .addBook{
     padding-right: 1rem;
+}
+
+.addBtn, .filterBtn, .searchBtn {
+    border-color: #faebfc;
+}
+
+.addBtn:hover, .searchBtn:hover, .filterBtn:hover {
+    background-color: #faebfc;
+    color: #282424;
+}
+
+.searchArea {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }

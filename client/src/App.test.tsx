@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import Home from './pages/home';
-import { render } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, screen } from '@testing-library/react';
 
 
 describe('Home Component', () => {
