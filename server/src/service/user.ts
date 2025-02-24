@@ -1,4 +1,7 @@
 import {User} from "../model/user";
+import bcrypt from "bcrypt";
+
+const salt = bcrypt.genSaltSync(10);
 
 export class UserService{
     users : User[] = [];
@@ -6,7 +9,7 @@ export class UserService{
     async createUser(username: string, password: string) {
         this.users.push({
             username: username,
-            password: password,
+            password: bcrypt.hashSync(password, salt),
             books: []
         });
     }
@@ -15,6 +18,6 @@ export class UserService{
         if (! password) {
             return this.users.find((user) => user.username === username);
         }
-        return this.users.find((user) => user.username === username && user.password === password);
+        return this.users.find((user) => user.username === username && bcrypt.compare(password, user.password));
     }
 }
