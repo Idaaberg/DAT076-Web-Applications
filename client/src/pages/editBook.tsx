@@ -1,4 +1,4 @@
-import '../styles/Form.css';
+import '../styles/form.css';
 import { RatingComponent } from '../components/Rating';
 import { useNavigate, useParams } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
@@ -28,7 +28,7 @@ function EditBook() {
 
         try {
             await editBook(book.id, book.title, book.author, book.state, book.rating ?? undefined, book.comment);
-            navigate("/");
+            navigate("/home");
         } catch (error) {
             console.error("Error editing book:", error);
         }
@@ -98,7 +98,7 @@ function EditBook() {
                         <button className="submitBtn" type="submit">
                             Save changes
                         </button>
-                        <a href="/">
+                        <a href="/home">
                             <button className="cancelBtn" type="button">
                                 Cancel
                             </button>

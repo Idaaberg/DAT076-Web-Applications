@@ -1,4 +1,4 @@
-import '../styles/Form.css';
+import '../styles/form.css';
 import { RatingComponent } from '../components/Rating';
 import { useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
@@ -18,7 +18,7 @@ function AddBook() {
 
     try {
       await addBook(title, author, state, rating ?? undefined, comment);
-      navigate("/"); 
+      navigate("/home"); 
     } catch (error) {
       console.error("Error adding book:", error);
     }
@@ -89,7 +89,7 @@ function AddBook() {
             <button className="submitBtn" type="submit">
               Submit
             </button>
-            <a href="/">
+            <a href="/home">
               <button className="cancelBtn" type="button">
                 Cancel
               </button>
