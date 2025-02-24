@@ -9,16 +9,19 @@ import { userRouter } from "./router/user";
 
 export const app = express();
 
-app.use(express.json());
-// dotenv.config();
-// if (! process.env.SESSION_SECRET) {
-//   console.log("Could not find SESSION_SECRET in .env file");
-//   process.exit();
-// }
+dotenv.config({ path:__dirname + "/.env" }); 
+if (! process.env.SESSION_SECRET) {
+  console.log("Could not find SESSION_SECRET in .env file");
+  process.exit();
+}
+
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
-    secret : "My secret passphrase",
-    resave : false,
-    saveUninitialized : true
+  secret : process.env.SESSION_SECRET,
+  resave : false,
+  saveUninitialized : true
 }));
 app.use(cors({
   origin: true,
@@ -29,3 +32,4 @@ const bookService = new BookService(userService);
 
 app.use("/user", userRouter(userService));
 app.use("/book", bookRouter(bookService));
+
