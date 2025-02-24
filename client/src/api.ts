@@ -41,3 +41,13 @@ export async function editBook(id: number, title: string, author: string, state:
   const response = await axios.patch<Book>(`${BASE_URL}/book/${id}`, { title, author, state, rating, comment })
   return response.data
 }
+
+export async function register(username: string, password: string): Promise<void> {
+  const response = await axios.post(`${BASE_URL}/user`, { username, password })
+  return response.data
+}
+
+export async function login(username: string, password: string): Promise<void> {
+  const response = await axios.post(`${BASE_URL}/user/login`, { username, password })
+  return response.data
+}
