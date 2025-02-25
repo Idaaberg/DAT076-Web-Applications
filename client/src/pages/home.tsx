@@ -41,7 +41,7 @@ function Home() {
                         <BookShelfComponent books={filteredBooks} />
                     </section>
                 ) : (
-                    <em>No books available</em>
+                    <em>No books found</em>
                 )}
             </div>
         </>
