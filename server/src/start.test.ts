@@ -1,10 +1,60 @@
-import * as SuperTest from "supertest";
 import { app } from "./start";
 import { Book, BookState } from "./model/book.interface";
 
-const request = SuperTest.default(app);
+const session = require("supertest-session");
+
+function createSession() {
+    return session(app);
+}
+
+async function register(request: any) {
+    await request.post("/user").send({
+        username: "TestUser",
+        password: "TestPassword",
+    });
+}
+
+async function login(request: any) { 
+    await request.post("/user/login").send({
+        username: "TestUser",
+        password: "TestPassword",
+    });
+}
+
+test("Registering a user should return 201 created response", async () => {
+    const request = createSession();
+
+    const postUser = await request.post("/user").send({
+        username: "TestUser",
+        password: "TestPassword",
+    });
+
+    expect(postUser.statusCode).toEqual(201);
+    expect(postUser.body.username).toEqual("TestUser");
+})
+
+test("Logging in a user should return 200 OK response", async () => {
+    const request = createSession();
+
+    await request.post("/user").send({
+        username: "TestUser",
+        password: "TestPassword",
+    });
+
+    const loginUser = await request.post("/user/login").send({
+        username: "TestUser",
+        password: "TestPassword",
+    });
+
+    expect(loginUser.statusCode).toEqual(200);
+})
 
 test("Creating a book should add book to list of books", async () => {
+    const request = createSession(); 
+
+    await register(request);
+    await login(request);
+
     const title = "Test Title";
     const author = "Test Author";
     const state: BookState = BookState.HaveRead;
@@ -12,11 +62,13 @@ test("Creating a book should add book to list of books", async () => {
     const comment = "Test Comment";
 
     const res1 = await request.post("/book").send({
-        title : title, 
-        author : author, 
-        state : state, 
-        rating : rating, 
-        comment : comment});
+        title,
+        author,
+        state,
+        rating,
+        comment
+    });
+
     expect(res1.statusCode).toEqual(201);
     expect(res1.body.title).toEqual(title);
     expect(res1.body.author).toEqual(author);
@@ -26,10 +78,15 @@ test("Creating a book should add book to list of books", async () => {
 
     const res2 = await request.get("/book");
     expect(res2.statusCode).toEqual(200);
-    expect(res2.body.map((book : Book) => book.title)).toContain(title);
+    expect(res2.body.map((book: Book) => book.title)).toContain(title);
 });
 
 test("Editing a book should update the book in the list of books", async () => {
+    const request = createSession(); 
+
+    await register(request);
+    await login(request);
+
     const title = "Test Title";
     const author = "Test Author";
     const state: BookState = BookState.HaveRead;

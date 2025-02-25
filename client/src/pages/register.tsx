@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { register } from "../api";
-import '../styles/Form.css';
+import '../styles/login.css';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -23,30 +23,39 @@ function Register() {
     }
 
     return (
-        <main>
-            <h1>Register</h1>
-            <form onSubmit={handleSubmit}>
-                <label>Username</label>
-                <input
-                    type="username"
-                    placeholder="Username"
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-                <label>Password</label>
-                <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                <button className="submitBtn" type="submit">Register</button>
-                
-                <Link to="/login">
-                    <button className="cancelBtn" type="button">Cancel</button>
-                </Link>
-            </form>
-        </main>
+        <>
+            <header className="bookShelfIcon">
+                <h3 className="headerText">BookShelf</h3>
+            </header>
+            <main>
+                <h1 className="loginHeader">Register</h1>
+                <form className="form" onSubmit={handleSubmit}>
+                    <label>Username</label>
+                    <input
+                        className="loginInput"
+                        type="username"
+                        placeholder="Username"
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                    <label>Password</label>
+                    <input
+                        className="loginInput"
+                        type="password"
+                        placeholder="Password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+
+                    <div className="formBtns">
+                        <button className="submitBtn" type="submit">Register</button>
+                        <a href="/login">
+                            <p className="cancelBtn">Cancel</p>
+                        </a>
+                    </div>
+                </form>
+            </main>
+        </>
     )
 }
 

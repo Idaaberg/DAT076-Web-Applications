@@ -2,8 +2,8 @@
 .addBookMain {
     min-height: 100vh; 
     display: flex; 
-    justify-content: center; 
-    align-items: start; 
+    justify-content: space-between; 
+    align-items: center; 
     padding-top: 30px;
 }
 
@@ -17,7 +17,6 @@
 .form-group {
     width: 100%;
     max-width: 500px;
-    padding: 20px; 
     border-radius: 8px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
