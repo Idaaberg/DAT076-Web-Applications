@@ -37,7 +37,7 @@ function EditBook() {
     return (
         <>
             <header>
-                <a href="/">
+                <a href="/home">
                     <HomeIcon className="homeIcon" sx={{ color: '#ff69b4' }} fontSize="large"/>
                 </a>
                 <h2 className="addBookHeader">Edit Book</h2>
