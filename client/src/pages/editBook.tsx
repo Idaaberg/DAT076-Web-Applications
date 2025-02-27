@@ -45,6 +45,7 @@ function EditBook() {
             <main className="addBookMain">
                 <form className="form-group" onSubmit={handleSubmit}>
                     <div>
+                        <label>Title</label>
                         <input
                             type="text"
                             value={book.title}

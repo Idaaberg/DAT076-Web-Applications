@@ -27,4 +27,26 @@ describe('Home Component', () => {
     const emptyMsg = screen.getByText("No books found");
     expect(emptyMsg).toBeInTheDocument();
   });
+
+  test('renders the search bar', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );
+
+    const search = screen.getByPlaceholderText("Search");
+    expect(search).toBeInTheDocument();
+  });
+
+  test('render the logo', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );
+
+    const logo = screen.getByText("BookShelf");
+    expect(logo).toBeInTheDocument();
+  });
 });
