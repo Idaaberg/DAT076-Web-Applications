@@ -1,34 +1,52 @@
-import { render, fireEvent } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
-import App from './App';
+import '@testing-library/jest-dom';
+import Home from './pages/home';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
-describe('App Component', () => {
-  test('renders the heading Vite + React', () => {
-    render(<App />);
-    const headingElement = screen.getByText(/Vite \+ React/i);
-    expect(headingElement).toBeInTheDocument();
+
+
+describe('Home Component', () => {
+  test('renders the add button', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );
+
+    const button = screen.getByRole('button', { name: "Add Book" });
+    expect(button).toBeInTheDocument();
   });
 
-  test('renders the initial count value of 0', () => {
-    render(<App />);
-    const countButton = screen.getByRole('button', { name: /count is 0/i });
-    expect(countButton).toBeInTheDocument();
+  test('renders empty message initially', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );   
+     
+    const emptyMsg = screen.getByText("No books found");
+    expect(emptyMsg).toBeInTheDocument();
   });
 
-  test('increments the count when the button is clicked', () => {
-    render(<App />);
-    const countButton = screen.getByRole('button', { name: /count is 0/i });
-    
-    fireEvent.click(countButton);
-    expect(countButton).toHaveTextContent('count is 1');
-    
-    fireEvent.click(countButton);
-    expect(countButton).toHaveTextContent('count is 2');
+  test('renders the search bar', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );
+
+    const search = screen.getByPlaceholderText("Search");
+    expect(search).toBeInTheDocument();
   });
 
-  test('renders the "read the docs" paragraph', () => {
-    render(<App />);
-    const docsParagraph = screen.getByText(/Click on the Vite and React logos to learn more/i);
-    expect(docsParagraph).toBeInTheDocument();
+  test('render the logo', () => {
+    render(
+      <MemoryRouter >
+        <Home />
+      </MemoryRouter>
+    );
+
+    const logo = screen.getByText("BookShelf");
+    expect(logo).toBeInTheDocument();
   });
 });
