@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "../styles/search-filter.css";
 
 interface SearchFilterProps {
     search: string;
