@@ -2,7 +2,6 @@ import { render, fireEvent, act } from '@testing-library/react';
 import { screen } from '@testing-library/dom';
 import axios from 'axios';
 import { MemoryRouter } from 'react-router';
-// import Register from '../pages/Register';
 import Login from '../pages/Login';
 
 jest.mock("axios")
