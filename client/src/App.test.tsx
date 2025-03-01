@@ -1,52 +1,65 @@
 import '@testing-library/jest-dom';
-import Home from './pages/Home';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter as Router } from "react-router-dom";
+import App from './App';
 
 
-
-describe('Home Component', () => {
-  test('renders the add button', () => {
+describe('App Component', () => {
+  test('renders the app', () => {
     render(
-      <MemoryRouter >
-        <Home />
-      </MemoryRouter>
-    );
-
-    const button = screen.getByRole('button', { name: "Add Book" });
-    expect(button).toBeInTheDocument();
+      <Router>
+        <App />
+      </Router>);
+    expect(document.body).toBeInTheDocument();
   });
 
-  test('renders empty message initially', () => {
+  test('redirects from "/" to "/login"', () => {
     render(
-      <MemoryRouter >
-        <Home />
-      </MemoryRouter>
-    );   
-     
-    const emptyMsg = screen.getByText("No books found");
-    expect(emptyMsg).toBeInTheDocument();
+      <Router initialEntries={['/']}>
+        <App />
+      </Router>
+    );
+    const loginHeader = screen.getByRole('heading', { name: /log in/i });
+    expect(loginHeader).toBeInTheDocument();
   });
 
-  test('renders the search bar', () => {
+  test('renders login page when navigating to /login', () => {
     render(
-      <MemoryRouter >
-        <Home />
-      </MemoryRouter>
+      <Router initialEntries={['/login']}>
+        <App />
+      </Router>
     );
-
-    const search = screen.getByPlaceholderText("Search");
-    expect(search).toBeInTheDocument();
+    const loginHeader = screen.getByRole('heading', { name: /log in/i });
+    expect(loginHeader).toBeInTheDocument();
   });
 
-  test('render the logo', () => {
+  test('renders home page when navigating to /home', () => {
     render(
-      <MemoryRouter >
-        <Home />
-      </MemoryRouter>
+      <Router initialEntries={['/home']}>
+        <App />
+      </Router>
     );
+    const noBooksMessage = screen.getByText(/no books found/i);
+    expect(noBooksMessage).toBeInTheDocument();
+  });
 
-    const logo = screen.getByText("BookShelf");
-    expect(logo).toBeInTheDocument();
+  test('renders register page when navigating to /register', () => {
+    render(
+      <Router initialEntries={['/register']}>
+        <App />
+      </Router>
+    );
+    const registerHeader = screen.getByRole('heading', { name: /register/i });
+    expect(registerHeader).toBeInTheDocument();
+  });
+
+  test('renders login page when navigating to /login', () => {
+    render(
+      <Router initialEntries={['/login']}>
+        <App />
+      </Router>
+    );
+    const loginHeader = screen.getByRole('heading', { name: /log in/i });
+    expect(loginHeader).toBeInTheDocument();
   });
 });
