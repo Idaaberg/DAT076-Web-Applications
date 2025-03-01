@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import Home from './pages/home';
+import Home from './pages/Home';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
