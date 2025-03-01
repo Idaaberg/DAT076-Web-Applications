@@ -6,8 +6,12 @@ function Register() {
     const navigate = useNavigate();
 
     const handleRegister = async (username: string, password: string) => {
-        await register(username, password);
-        navigate("/login");
+        try {
+            await register(username, password);
+            navigate("/login");
+        } catch (error) {
+            console.error("Error in Register:", error);
+        }
     };
 
     return (
