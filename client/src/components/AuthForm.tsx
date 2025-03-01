@@ -30,8 +30,9 @@ function AuthForm({ title, buttonText, onSubmit, linkText, linkTo }: AuthFormPro
             <main>
                 <h1 className="loginHeader">{title}</h1>
                 <form className="form" onSubmit={handleSubmit}>
-                    <label>Username</label>
+                    <label htmlFor="username">Username</label>
                     <input
+                        id="username"
                         className="loginInput"
                         type="text"
                         placeholder="Username"
@@ -39,8 +40,9 @@ function AuthForm({ title, buttonText, onSubmit, linkText, linkTo }: AuthFormPro
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    <label>Password</label>
+                    <label htmlFor="password">Password</label>
                     <input
+                        id="password"
                         className="loginInput"
                         type="password"
                         placeholder="Password"
