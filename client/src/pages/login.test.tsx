@@ -22,7 +22,7 @@ describe('A login screen', () => {
     await act(async () => {
       fireEvent.change(await userNameField, {target: {value: "JohnDoe"}});
       fireEvent.change(await passwordField, {target: {value: "drowssap"}});
-      fireEvent.click(await loginButton);
+      fireEvent.click(loginButton);
     });
 
     expect(mockedAxios.post).toHaveBeenCalledWith("http://localhost:8080/user/login",
