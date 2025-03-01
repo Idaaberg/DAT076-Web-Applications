@@ -35,6 +35,7 @@ export function SearchFilterComponent({ search, setSearch, setFilterBy }: Search
 
             <div className="dropdown">
                 <button
+                    data-testid="filterBtn"
                     className="filterBtn"
                     type="button"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
