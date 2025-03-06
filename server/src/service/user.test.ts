@@ -3,7 +3,6 @@ import { conn } from "../db/conn";
 import { UserModel } from "../db/user.db";
 import { UserService } from "../service/user";
 import bcrypt from "bcrypt";
-import { BookService } from "./book";
 
 beforeAll(async () => {
     await conn.sync({ force: true });
@@ -12,7 +11,6 @@ beforeAll(async () => {
 afterAll(async () => {
     await conn.close();
 });
-
 
 describe("UserService", () => {
     let userService: UserService;
