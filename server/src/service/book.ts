@@ -6,18 +6,17 @@ import { UserService } from './user';
 
 export class BookService implements IBookService {
     private userService: UserService;
-    private nextId: number = 0
 
     constructor(userService: UserService) {
         this.userService = userService;
     }
 
-    async getBooks(username: string) : Promise<Book[] | undefined> {
-        const user : User | undefined = await this.userService.findUser(username);
-        if (! user) {
+    async getBooks(username: string): Promise<Book[] | undefined> {
+        const user: User | undefined = await this.userService.findUser(username);
+        if (!user) {
             return undefined
         }
-        const books = await BookModel.findAll({ where: {userId: user.id }});
+        const books = await BookModel.findAll({ where: { userId: user.id } });
         return books.map(book => ({
             id: book.id,
             title: book.title,
@@ -35,7 +34,6 @@ export class BookService implements IBookService {
             return undefined;
         }
         return {
-            id: book.id,
             title: book.title,
             author: book.author,
             state: book.state,
@@ -53,38 +51,42 @@ export class BookService implements IBookService {
         title: string,
         author: string,
         state: BookState,
-        rating?:  number,
+        rating?: number,
         comment?: string
     ): Promise<Book | undefined> {
+        try {
 
-        const user : User | undefined = await this.userService.findUser(username);
-        if (! user) {
+
+            const user: User | undefined = await this.userService.findUser(username);
+            if (!user) {
+                return undefined;
+            }
+            if (rating !== undefined && !BookService.validateRating(rating)) {
+                throw new Error("Invalid rating value");
+            }
+            const newBook = await BookModel.create({
+                title: title,
+                author: author,
+                state: state,
+                rating: rating || NaN,
+                comment: comment || '',
+                userId: user.id
+
+            })
+            if (!user) {
+                return undefined;
+            }
+            return {
+                title: newBook.title,
+                author: newBook.author,
+                state: newBook.state,
+                rating: BookService.validateRating(newBook.rating) ? newBook.rating : undefined,
+                comment: newBook.comment
+            };
+        } catch (e) {
+            console.error("Error occurred while adding book:", e);
             return undefined;
         }
-        if (rating !== undefined && !BookService.validateRating(rating)) {
-            throw new Error("Invalid rating value");
-        }
-        const newBook = await BookModel.create({
-            id: this.nextId++,
-            title: title,
-            author: author,
-            state: state,
-            rating: rating || NaN,
-            comment: comment || '',
-            userId: user.id
-
-        })
-        if (!user) {
-            return undefined;
-        }
-        return {
-            id: newBook.id,
-            title: newBook.title,
-            author: newBook.author,
-            state: newBook.state,
-            rating: BookService.validateRating(newBook.rating) ? newBook.rating : undefined,
-            comment: newBook.comment
-        };
     }
 
     async editBook(
@@ -98,35 +100,34 @@ export class BookService implements IBookService {
     ): Promise<Book | undefined> {
         const user: User | undefined = await this.userService.findUser(username);
         if (!user) {
-            return undefined; 
+            return undefined;
         }
-    
+
         const bookToUpdate = await BookModel.findOne({
             where: { id, userId: user.id }
         });
-    
+
         if (!bookToUpdate) {
-            return undefined; 
+            return undefined;
         }
-    
+
         if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }
-    
+
         const updatedBook = await bookToUpdate.update({
             title,
             author,
             state,
-            rating: rating ?? undefined, 
-            comment: comment || '', 
+            rating: rating ?? undefined,
+            comment: comment || '',
         });
-    
+
         return {
-            id: updatedBook.id,
             title: updatedBook.title,
             author: updatedBook.author,
             state: updatedBook.state,
-            rating: BookService.validateRating(updatedBook.rating) ? updatedBook.rating : undefined, 
+            rating: BookService.validateRating(updatedBook.rating) ? updatedBook.rating : undefined,
             comment: updatedBook.comment
         };
     }
