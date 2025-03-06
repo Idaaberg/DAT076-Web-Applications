@@ -34,6 +34,7 @@ export class BookService implements IBookService {
             return undefined;
         }
         return {
+            id: book.id,
             title: book.title,
             author: book.author,
             state: book.state,
@@ -55,8 +56,6 @@ export class BookService implements IBookService {
         comment?: string
     ): Promise<Book | undefined> {
         try {
-
-
             const user: User | undefined = await this.userService.findUser(username);
             if (!user) {
                 return undefined;
@@ -68,14 +67,10 @@ export class BookService implements IBookService {
                 title: title,
                 author: author,
                 state: state,
-                rating: rating || NaN,
-                comment: comment || '',
+                rating: rating || undefined,
+                comment: comment || undefined,
                 userId: user.id
-
-            })
-            if (!user) {
-                return undefined;
-            }
+            });
             return {
                 title: newBook.title,
                 author: newBook.author,
@@ -102,27 +97,27 @@ export class BookService implements IBookService {
         if (!user) {
             return undefined;
         }
-
+    
         const bookToUpdate = await BookModel.findOne({
             where: { id, userId: user.id }
         });
-
+    
         if (!bookToUpdate) {
             return undefined;
         }
-
+    
         if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }
-
+    
         const updatedBook = await bookToUpdate.update({
             title,
             author,
             state,
-            rating: rating ?? undefined,
-            comment: comment || '',
+            rating: rating ?? undefined,  // If rating is undefined, keep it unchanged
+            comment: comment ?? undefined,  // If comment is undefined, keep it unchanged
         });
-
+    
         return {
             title: updatedBook.title,
             author: updatedBook.author,
@@ -131,4 +126,5 @@ export class BookService implements IBookService {
             comment: updatedBook.comment
         };
     }
+    
 }

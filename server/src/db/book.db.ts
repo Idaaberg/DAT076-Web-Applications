@@ -8,8 +8,8 @@ export class BookModel extends Model<InferAttributes<BookModel>, InferCreationAt
   declare title: string;
   declare author: string;
   declare state: BookState
-  declare rating: number;
-  declare comment: string;
+  declare rating: number | undefined;
+  declare comment: string | undefined;
   declare userId: ForeignKey<UserModel['id']>
 }
 
