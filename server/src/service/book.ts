@@ -27,8 +27,7 @@ export class BookService implements IBookService {
         }));
     }
 
-
-    async getBookById(username: string, id: number): Promise<Book | undefined> {
+    async getBookById(id: number): Promise<Book | undefined> {
         const book = await BookModel.findByPk(id);
         if (!book) {
             return undefined;
@@ -97,27 +96,27 @@ export class BookService implements IBookService {
         if (!user) {
             return undefined;
         }
-    
+
         const bookToUpdate = await BookModel.findOne({
             where: { id, userId: user.id }
         });
-    
+
         if (!bookToUpdate) {
             return undefined;
         }
-    
+
         if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }
-    
+
         const updatedBook = await bookToUpdate.update({
             title,
             author,
             state,
-            rating: rating ?? undefined,  // If rating is undefined, keep it unchanged
-            comment: comment ?? undefined,  // If comment is undefined, keep it unchanged
+            rating: rating ?? undefined,
+            comment: comment ?? undefined,
         });
-    
+
         return {
             title: updatedBook.title,
             author: updatedBook.author,
@@ -126,5 +125,5 @@ export class BookService implements IBookService {
             comment: updatedBook.comment
         };
     }
-    
+
 }

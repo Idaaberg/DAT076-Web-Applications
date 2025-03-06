@@ -45,7 +45,7 @@ export function bookRouter(bookService: IBookService): Router {
                 res.status(400).send("Invalid book ID");
                 return;
             }
-            const book: Book | undefined = await bookService.getBookById(req.session.username,id);
+            const book: Book | undefined = await bookService.getBookById(id);
             res.status(200).send(book);
             if (!book) {
                 console.log("User logged in as " + req.session.username + " no longer exists");
