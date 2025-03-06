@@ -1,8 +1,8 @@
 import express, { Request, Response, Router } from "express";
-import { UserService } from "../service/user";
 import { User } from "../model/user";
+import { IUserService } from "../service/IUserService.interface";
 
-export function userRouter(userService: UserService): Router {
+export function userRouter(userService: IUserService): Router {
     const userRouter = express.Router();
 
     interface UserRequest extends Request {
