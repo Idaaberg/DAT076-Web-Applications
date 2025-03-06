@@ -1,6 +1,6 @@
 import { BookService } from "../service/book";
 import { UserService } from "../service/user";
-import { Book, BookState } from "../model/book.interface";
+import { BookState } from "../model/book.interface";
 
 describe("BookService", () => {
     let bookService: BookService;
@@ -45,7 +45,7 @@ describe("BookService", () => {
         const book = await bookService.addBook("TestUser", "Original Title", "Original Author", BookState.HaveRead);
         expect(book).toBeDefined();
         
-        const updatedBook = await bookService.editBookProps(
+        const updatedBook = await bookService.editBook(
             "TestUser",
             book!.id,
             "Updated Title",
@@ -78,12 +78,12 @@ describe("BookService", () => {
     });
 
     test("Trying to edit a book for a non-existent user should return undefined", async () => {
-        const book = await bookService.editBookProps("FakeUser", 1, "New Title", "New Author", BookState.Reading);
+        const book = await bookService.editBook("FakeUser", 1, "New Title", "New Author", BookState.Reading);
         expect(book).toBeUndefined();
     });
 
     test("Trying to edit a non-existent book should return undefined", async () => {
-        const book = await bookService.editBookProps("TestUser", 999, "New Title", "New Author", BookState.Reading);
+        const book = await bookService.editBook("TestUser", 999, "New Title", "New Author", BookState.Reading);
         expect(book).toBeUndefined();
     });
 });
