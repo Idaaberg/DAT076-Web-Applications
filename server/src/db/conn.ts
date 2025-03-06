@@ -5,7 +5,7 @@ import path from "path";
 
 export let conn : Sequelize;
 
-dotenv.config({ path: path.resolve(__dirname, "../.env") });
+dotenv.config();
 
 conn = new Sequelize(`postgres://app_db_user:${process.env.DB_PASSWORD}@localhost:54321`);
 
