@@ -29,7 +29,10 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
-    "react-bootstrap": "^2.10.9"
+    "pg": "^8.13.3",
+    "pg-hstore": "^2.3.4",
+    "react-bootstrap": "^2.10.9",
+    "sequelize": "^6.37.5"
   },
   "devDependencies": {
     "@types/axios": "^0.9.36",
