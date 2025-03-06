@@ -1,9 +1,10 @@
 import express, { Request, Response, Router } from "express";
-import { BookService } from "../service/book";
 import { Book, BookState } from "../model/book.interface";
+import { IBookService } from "../service/IBookService.interface";
+import { BookService } from "../service/book";
 
 
-export function bookRouter(bookService: BookService): Router {
+export function bookRouter(bookService: IBookService): Router {
     const bookRouter = express.Router();
 
     interface BookRequest {
@@ -120,7 +121,7 @@ export function bookRouter(bookService: BookService): Router {
                 res.status(400).send(`id number must be a non-negative integer`);
                 return;
             }
-            const stateChange = await bookService.editBookProps(req.session.username, index, title, author, state, rating, comment);
+            const stateChange = await bookService.editBook(req.session.username, index, title, author, state, rating, comment);
             if (!stateChange) {
                 res.status(404).send(`No book with index ${index}`)
                 return;
