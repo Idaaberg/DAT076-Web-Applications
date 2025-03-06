@@ -1,33 +1,47 @@
 import { Book, BookState } from '../model/book.interface';
 import { User } from '../model/user';
-import { UserService } from "./user";
+import { IBookService } from './IBookService.interface';
+import { BookModel } from "../db/book.db";
+import { UserService } from './user';
 
-export class BookService {
-    private userService: UserService
+export class BookService implements IBookService {
+    private userService: UserService;
     private nextId: number = 0
 
     constructor(userService: UserService) {
         this.userService = userService;
     }
 
-    async getBooks(username: string): Promise<Book[] | undefined> {
-        const user: User | undefined = await this.userService.findUser(username);
-        if (!user) {
+    async getBooks(username: string) : Promise<Book[] | undefined> {
+        const user : User | undefined = await this.userService.findUser(username);
+        if (! user) {
             return undefined
         }
-        return JSON.parse(JSON.stringify(user.books));
+        const books = await BookModel.findAll({ where: {userId: user.id }});
+        return books.map(book => ({
+            id: book.id,
+            title: book.title,
+            author: book.author,
+            state: book.state,
+            rating: BookService.validateRating(book.rating) ? book.rating : undefined,
+            comment: book.comment
+        }));
     }
 
+
     async getBookById(username: string, id: number): Promise<Book | undefined> {
-        const user: User | undefined = await this.userService.findUser(username);
-        if (!user) {
-            return undefined
-        }
-        const book: Book | undefined = user.books.find((book) => book.id === id)
+        const book = await BookModel.findByPk(id);
         if (!book) {
             return undefined;
         }
-        return book;
+        return {
+            id: book.id,
+            title: book.title,
+            author: book.author,
+            state: book.state,
+            rating: BookService.validateRating(book.rating) ? book.rating : undefined,
+            comment: book.comment
+        }
     }
 
     static validateRating(rating?: number): rating is 1 | 2 | 3 | 4 | 5 | undefined {
@@ -39,30 +53,41 @@ export class BookService {
         title: string,
         author: string,
         state: BookState,
-        rating?: number | undefined,
-        comment?: string | undefined
+        rating?:  number,
+        comment?: string
     ): Promise<Book | undefined> {
+
+        const user : User | undefined = await this.userService.findUser(username);
+        if (! user) {
+            return undefined;
+        }
         if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }
-        const newBook: Book = {
+        const newBook = await BookModel.create({
             id: this.nextId++,
             title: title,
             author: author,
             state: state,
-            rating: rating,
-            comment: comment
-        }
-        const user: User | undefined = await this.userService.findUser(username);
+            rating: rating || NaN,
+            comment: comment || '',
+            userId: user.id
 
+        })
         if (!user) {
-            return undefined
+            return undefined;
         }
-        user.books.push(newBook);
-        return { ...newBook };
+        return {
+            id: newBook.id,
+            title: newBook.title,
+            author: newBook.author,
+            state: newBook.state,
+            rating: BookService.validateRating(newBook.rating) ? newBook.rating : undefined,
+            comment: newBook.comment
+        };
     }
 
-    async editBookProps(
+    async editBook(
         username: string,
         id: number,
         title: string,
@@ -73,21 +98,36 @@ export class BookService {
     ): Promise<Book | undefined> {
         const user: User | undefined = await this.userService.findUser(username);
         if (!user) {
-            return undefined
+            return undefined; 
         }
-        const book = user.books.find((book) => book.id === id);
-        if (!book) {
-            return undefined;
+    
+        const bookToUpdate = await BookModel.findOne({
+            where: { id, userId: user.id }
+        });
+    
+        if (!bookToUpdate) {
+            return undefined; 
         }
-        book.title = title;
-        book.author = author;
-        book.state = state;
-        if (BookService.validateRating(rating)) {
-            book.rating = rating;
-        } else {
+    
+        if (rating !== undefined && !BookService.validateRating(rating)) {
             throw new Error("Invalid rating value");
         }
-        book.comment = comment;
-        return { ...book };
+    
+        const updatedBook = await bookToUpdate.update({
+            title,
+            author,
+            state,
+            rating: rating ?? undefined, 
+            comment: comment || '', 
+        });
+    
+        return {
+            id: updatedBook.id,
+            title: updatedBook.title,
+            author: updatedBook.author,
+            state: updatedBook.state,
+            rating: BookService.validateRating(updatedBook.rating) ? updatedBook.rating : undefined, 
+            comment: updatedBook.comment
+        };
     }
 }
