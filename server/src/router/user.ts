@@ -14,11 +14,13 @@ interface UsernameQuery {
 export function userRouter(userService: IUserService): Router {
     const userRouter = express.Router();
 
+    // POST /user
     userRouter.post("/", async (req: UserRequest, res: Response) => {
         await userService.createUser(req.body.username, req.body.password);
         res.status(201).send({ username: req.body.username });
     })
 
+    // POST /user/login
     userRouter.post("/login", async (req: UserRequest, res: Response) => {
         const user: User | undefined = await userService.findUser(req.body.username, req.body.password);
         if (!user) {
@@ -29,6 +31,7 @@ export function userRouter(userService: IUserService): Router {
         res.status(200).send("Logged in");
     })
 
+    // POST/user/logout
     userRouter.post("/logout", async (req: UserRequest, res: Response) => {
         delete req.session.username;
         res.status(200).send("Logged out");
@@ -48,6 +51,7 @@ export function userRouter(userService: IUserService): Router {
         }
       };
     
+    // GET /user/exists
     userRouter.get("/exists", existsHandler);
 
     return userRouter;

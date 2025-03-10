@@ -11,6 +11,7 @@ export function bookRouter(bookService: IBookService): Router {
         session: any
     }
 
+    // GET /book
     bookRouter.get("/", async (req: BookRequest, res: Response<Book[] | string>) => {
         try {
             if (!req.session.username) {
@@ -34,6 +35,7 @@ export function bookRouter(bookService: IBookService): Router {
         params: { id: string };
     }
 
+    // GET /book/:id
     bookRouter.get('/:id', async (req: BookRequestWithId, res: Response<Book | string>) => {
         try {
             if (!req.session.username) {
@@ -63,6 +65,7 @@ export function bookRouter(bookService: IBookService): Router {
         session: any
     }
 
+    // POST /book
     bookRouter.post("/", async (req: CreateBookRequest, res: Response<Book | string>) => {
         try {
             if (!req.session.username) {
@@ -101,6 +104,7 @@ export function bookRouter(bookService: IBookService): Router {
         session: any
     }
 
+    // PATCH /book/:id
     bookRouter.patch("/:id", async (req: EditBookRequest, res: Response<Book | string>) => {
         try {
             if (!req.session.username) {

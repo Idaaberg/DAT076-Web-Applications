@@ -11,6 +11,11 @@ export class BookService implements IBookService {
         this.userService = userService;
     }
 
+    /**
+     * Returns a list of books for a given user
+     * @param username 
+     * @returns Book[] if successful or undefined if the user does not exist
+     */
     async getBooks(username: string): Promise<Book[] | undefined> {
         const user: User | undefined = await this.userService.findUser(username);
         if (!user) {
@@ -27,6 +32,11 @@ export class BookService implements IBookService {
         }));
     }
 
+    /**
+     * Returns a book by its ID
+     * @param id 
+     * @returns Book if successful or undefined if the book does not exist
+     */
     async getBookById(id: number): Promise<Book | undefined> {
         const book = await BookModel.findByPk(id);
         if (!book) {
@@ -46,6 +56,16 @@ export class BookService implements IBookService {
         return rating === undefined || [1, 2, 3, 4, 5].includes(Number(rating));
     }
 
+    /**
+     * Adds a book to the user's bookshelf
+     * @param username 
+     * @param title 
+     * @param author 
+     * @param state 
+     * @param rating 
+     * @param comment 
+     * @returns the created book if successful, or undefined if the user does not exist
+     */
     async addBook(
         username: string,
         title: string,
@@ -83,6 +103,17 @@ export class BookService implements IBookService {
         }
     }
 
+    /**
+     * Edits a book in the user's bookshelf
+     * @param username 
+     * @param id 
+     * @param title 
+     * @param author 
+     * @param state 
+     * @param rating 
+     * @param comment 
+     * @returns the updated book if successful, or undefined if the user or book does not exist
+     */
     async editBook(
         username: string,
         id: number,

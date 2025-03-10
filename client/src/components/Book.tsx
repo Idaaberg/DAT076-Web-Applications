@@ -1,7 +1,11 @@
 import { Book } from '../api';
 import defaultImage from '../img/default.jpg';
 
-
+/**
+ * Defines the Book component
+ * @param book - the book
+ * @returns Book component
+ */
 export function BookComponent({ book }: { book: Book }) {
     return (
         <a href={`/edit/${book.id}`}>

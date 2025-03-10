@@ -1,12 +1,20 @@
 import { useState } from "react";
 import "../styles/search-filter.css";
 
+
 interface SearchFilterProps {
     search: string;
     setSearch: (value: string) => void;
     setFilterBy: (filter: "title" | "author" | "state" | "rating") => void;
 }
 
+/**
+ * Defines the SearchFilter component
+ * @param search - the search string
+ * @param setSearch - the function to set the search string
+ * @param setFilterBy - the function to set the filter
+ * @returns SearchFilter component
+ */
 export function SearchFilterComponent({ search, setSearch, setFilterBy }: SearchFilterProps) {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState("Filter");

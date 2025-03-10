@@ -12,6 +12,16 @@ interface AuthFormProps {
     errors:  Errors;
 }
 
+/**
+ * Defines the AuthForm component
+ * @param title The title of the form
+ * @param buttonText The text of the submit button
+ * @param onSubmit The function to call when the form is submitted
+ * @param linkText The text of the link to another form
+ * @param linkTo The path to the other form
+ * @param errors The errors to display
+ * @returns The AuthForm component
+ */
 function AuthForm({ title, buttonText, onSubmit, linkText, linkTo, errors }: AuthFormProps) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

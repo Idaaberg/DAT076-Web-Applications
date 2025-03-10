@@ -4,12 +4,20 @@ import HomeIcon from "@mui/icons-material/Home";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
 
+
 interface BookFormProps {
   initialBook?: Book;
   onSubmit: (book: Book) => Promise<void>;
   isEditing?: boolean;
 }
 
+/**
+ * Defines the BookForm component
+ * @param initialBook - the initial book
+ * @param onSubmit - the function to submit the book
+ * @param isEditing - the boolean to check if in editing mode
+ * @returns BookForm component
+ */
 const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = false }) => {
   const [book, setBook] = useState<Book>(
     initialBook || {

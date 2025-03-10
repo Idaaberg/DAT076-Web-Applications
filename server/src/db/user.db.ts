@@ -4,6 +4,9 @@ import { conn } from "./conn";
 import { BookModel } from "./book.db";
 
 
+/**
+ * UserModel represents a user in the database
+ */
 export class UserModel extends Model<InferAttributes<UserModel>, InferCreationAttributes<UserModel>> {
   declare id: CreationOptional<number>;
   declare username: string;

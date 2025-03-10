@@ -3,10 +3,16 @@ import bcrypt from "bcrypt";
 import { IUserService } from "./IUserService.interface";
 import { UserModel } from "../db/user.db";
 
+
 const salt = bcrypt.genSaltSync(10);
 
 export class UserService implements IUserService {
-
+    /**
+     * Creates a new user and encrypts the password
+     * @param username - The username of the new user
+     * @param password - The password of the new user
+     * @returns The created UserModel instance if successful, or null if the username already exists
+    */
     async createUser(username: string, password: string) : Promise<UserModel | null> {
         if (await UserModel.findOne({ where: { username: username }})) {
             return null;
@@ -17,6 +23,12 @@ export class UserService implements IUserService {
         });
     }
 
+    /**
+     * Finds a user by username and/or password
+     * @param username 
+     * @param password 
+     * @returns 
+     */
     async findUser(username: string, password?: string): Promise<User | undefined> {
         const user = await UserModel.findOne({ where: { username: username }});
         if (! password) {

@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Errors } from "../types/types";
 
 
+/**
+ * Defines the Register page
+ * @returns Register page
+ */
 function Register() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<Errors>({});

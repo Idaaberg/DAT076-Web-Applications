@@ -4,6 +4,11 @@ import { useParams } from 'react-router-dom';
 import { Book, editBook, getBookById } from '../api';
 import BookForm from '../components/BookForm';
 
+
+/**
+ * Defines the EditBook page
+ * @returns EditBook page
+ */
 function EditBook() {
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);

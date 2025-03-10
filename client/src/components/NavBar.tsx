@@ -1,12 +1,20 @@
 import "../styles/navbar.css";
 import { SearchFilterComponent } from "./SearchFilter"; 
 
+
 interface NavbarProps {
     search: string;
     setSearch: (value: string) => void;
     setFilterBy: (filter: "title" | "author" | "state" | "rating") => void;
 }
 
+/**
+ * Defines the Navbar component
+ * @param search - the search string
+ * @param setSearch - the function to set the search string
+ * @param setFilterBy - the function to set the filter
+ * @returns Navbar component
+ */
 export function NavbarComponent({ search, setSearch, setFilterBy }: NavbarProps) {
     return (
         <nav>

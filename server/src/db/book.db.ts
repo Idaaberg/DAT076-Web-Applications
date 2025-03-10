@@ -3,6 +3,10 @@ import { conn } from './conn';
 import { UserModel } from './user.db';
 import { BookState } from '../model/book.interface';
 
+
+/**
+ * BookModel represents a book in the database
+ */
 export class BookModel extends Model<InferAttributes<BookModel>, InferCreationAttributes<BookModel>> {
   declare id: CreationOptional<number>;
   declare title: string;

@@ -4,6 +4,11 @@ import { Book, getBooks } from "../api";
 import { BookShelfComponent } from "../components/BookShelf";
 import "../App.css";
 
+
+/**
+ * Defines the Home page
+ * @returns Home page
+ */
 function Home() {
     const [books, setBooks] = useState<Book[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);

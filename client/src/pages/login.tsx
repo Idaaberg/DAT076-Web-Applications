@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { Errors } from "../types/types";
 
 
+/**
+ * Defines the Login page
+ * @returns Login page
+ */
 function Login() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<Errors>({});
