@@ -51,3 +51,13 @@ export async function login(username: string, password: string): Promise<void> {
   const response = await axios.post(`${BASE_URL}/user/login`, { username, password })
   return response.data
 }
+
+export async function checkUsernameExists(username: string): Promise<boolean> {
+  try {
+    const response = await axios.get(`${BASE_URL}/user/exists?username=${username}`);
+    return response.data.exists;
+  } catch (error) {
+    console.error("Error checking username existence:", error);
+    return false;
+  }
+}
