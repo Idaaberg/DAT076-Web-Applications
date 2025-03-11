@@ -37,8 +37,6 @@ export function SearchFilterComponent({ search, setSearch, setFilterBy }: Search
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                {/* TODO is this button needed? */}
-                <button className="searchBtn" type="button">Search</button> 
             </form>
 
             <div className="dropdown">

@@ -30,15 +30,26 @@ nav {
     gap: 10px;
 }
 
+.search{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .addBook{
+    padding-left: 1rem;
+}
+
+.profile{
     padding-right: 1rem;
 }
 
-.addBtn, .filterBtn, .searchBtn {
+.addBtn, .filterBtn, .profileBtn {
     border-color: #faebfc;
 }
 
-.addBtn:hover, .searchBtn:hover, .filterBtn:hover {
+.addBtn:hover, .profileBtn:hover, .filterBtn:hover {
     background-color: #faebfc;
     color: #282424;
 }

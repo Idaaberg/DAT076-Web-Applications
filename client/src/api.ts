@@ -88,6 +88,14 @@ export async function login(username: string, password: string): Promise<void> {
 }
 
 /**
+ * Logs out the current user
+ */
+export async function logout(): Promise<void> {
+  const response = await axios.post(`${BASE_URL}/user/logout`)
+  return response.data
+}
+
+/**
  * Checks if a username already exists
  * @param username 
  * @returns a boolean indicating if the username exists, true if exists, false otherwise

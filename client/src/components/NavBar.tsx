@@ -1,5 +1,5 @@
 import "../styles/navbar.css";
-import { SearchFilterComponent } from "./SearchFilter"; 
+import { SearchFilterComponent } from "./SearchFilter";
 
 
 interface NavbarProps {
@@ -20,19 +20,25 @@ export function NavbarComponent({ search, setSearch, setFilterBy }: NavbarProps)
         <nav>
             <div className="bar">
                 <h3 className="logo">BookShelf</h3>
+                <div className="search">
+                    <SearchFilterComponent
+                        search={search}
+                        setSearch={setSearch}
+                        setFilterBy={setFilterBy}
+                    />
 
-                <SearchFilterComponent 
-                    search={search} 
-                    setSearch={setSearch} 
-                    setFilterBy={setFilterBy} 
-                />
-
-                <div className="addBook">
-                    <a href="/add">
-                        <button className="addBtn" type="button">Add Book</button>
+                    <div className="addBook">
+                        <a href="/add">
+                            <button className="addBtn" type="button">Add Book</button>
+                        </a>
+                    </div>
+                </div>
+                <div className="profile">
+                    <a href="/profile">
+                        <button className="profileBtn" type="button">Profile</button>
                     </a>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
 }
