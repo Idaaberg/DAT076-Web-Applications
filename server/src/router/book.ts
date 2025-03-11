@@ -136,5 +136,28 @@ export function bookRouter(bookService: IBookService): Router {
         }
     });
 
+    // DELETE /book/:id
+    bookRouter.delete("/:id", async (req: BookRequestWithId, res: Response<string>) => {
+        try {
+            if (!req.session.username) {
+                res.status(401).send("Not logged in");
+                return;
+            }
+            const id = Number(req.params.id);
+            if (isNaN(id)) {
+                res.status(400).send("Invalid book ID");
+                return;
+            }
+            const deletedBook = await bookService.deleteBook(req.session.username, id);
+            if (!deletedBook) {
+                res.status(404).send(`No book with id ${id}`);
+                return;
+            }
+            res.status(200).send(`Book with id ${id} has been deleted`);
+        } catch (e: any) {
+            res.status(500).send(e.message);
+        }
+    });
+
     return bookRouter;
 }

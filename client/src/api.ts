@@ -65,6 +65,11 @@ export async function editBook(id: number, title: string, author: string, state:
   return response.data
 }
 
+export async function deleteBook(id: number): Promise<boolean> {
+  const response = await axios.delete<boolean>(`${BASE_URL}/book/${id}`)
+  return response.data
+}
+
 /**
  * Registers a new user
  * @param username 

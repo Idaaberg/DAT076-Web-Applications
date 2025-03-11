@@ -23,4 +23,6 @@ export interface IBookService {
         rating?: number, 
         comment?: string
     ): Promise<Book | undefined>;
+
+    deleteBook(username: string, id: number): Promise<boolean>;
 }

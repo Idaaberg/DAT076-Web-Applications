@@ -157,4 +157,28 @@ export class BookService implements IBookService {
         };
     }
 
+    /**
+     * Deletes a book from the user's bookshelf
+     * @param username 
+     * @param id - the ID of the book to delete
+     * @returns true if successful, or false if the user or book does not exist
+     */
+    async deleteBook(username: string, id: number): Promise<boolean> {
+        const user: User | undefined = await this.userService.findUser(username);
+        if (!user) {
+            return false;
+        }
+
+        const bookToDelete = await BookModel.findOne({
+            where: { id, userId: user.id }
+        });
+
+        if (!bookToDelete) {
+            return false;
+        }
+
+        await bookToDelete.destroy();
+        return true;
+    }
+
 }

@@ -3,6 +3,7 @@ import { RatingComponent } from "./Rating";
 import HomeIcon from "@mui/icons-material/Home";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
+import { DeleteButton } from "./DeleteButton";
 
 
 interface BookFormProps {
@@ -111,9 +112,7 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
               {isEditing ? "Save Changes" : "Submit"}
             </button>
             <a href="/home">
-              <button className="cancelBtn" type="button">
-                Cancel
-              </button>
+              {isEditing ? <DeleteButton bookId={book.id} /> : <button className="cancelBtn" type="button">Cancel</button>}
             </a>
           </div>
         </form>
