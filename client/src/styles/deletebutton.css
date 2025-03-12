@@ -1,5 +1,47 @@
+.popupContainer {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5); 
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; 
+    gap: 20px;
+    border: 2px solid black;
+  }
+  
+  .popupContent {
+    background: #242424;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 300px; /* Adjust as needed */
+    
+  }
+ 
+  .popupButtons {
+    display: flex;
+    justify-content: space-between; 
+    gap: 10px; 
+    margin-top: 15px; 
+  }
+  
+  .cancelDeleteBtn, .deleteBtn {
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    flex: 1;
+  }
+  
+  
 .deleteBtn {
-    background-color: red;
+    background-color: rgb(159, 0, 0);
+    border: 2px solid black;
     color: white;
     transition: background-color 0.3s ease;
 }

@@ -3,7 +3,7 @@ import { RatingComponent } from "./Rating";
 import HomeIcon from "@mui/icons-material/Home";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
-import { DeleteButton } from "./DeleteButton";
+import { DeletePopup } from "./DeletePopup";
 
 
 interface BookFormProps {
@@ -32,6 +32,7 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
   );
 
   const navigate = useNavigate();
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,20 +109,28 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
           </div>
 
           <div className="buttonGroup">
-            <button className="submitBtn" type="submit">
-              {isEditing ? "Save Changes" : "Submit"}
-            </button>
-            <a href="/home">
-              {isEditing ? <DeleteButton bookId={book.id} /> : <button className="cancelBtn" type="button">Cancel</button>}
-            </a>
             {isEditing ? (
               <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("editSuccess", "true")}>Save Changes</button>
 
             ) : (
               <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("bookAdded", "true")}>Submit</button>
             )}
+            {isEditing ?
+              <button className="deleteBtn" type="button" onClick={() => {
+                console.log("Before state update:", popupOpen); // Logs the current state before change
+                setPopupOpen(true);
+                console.log("After state update (Won't show immediately!):", popupOpen);
+              }}>Delete</button>
+              :
+              <a className="cancelBtn" href="/home">
+                <button className="cancelBtn" type="button">Cancel</button>
+              </a>
+            }
           </div>
         </form>
+        {popupOpen && (
+          <DeletePopup bookId={book.id} setPopupOpen={setPopupOpen} />
+        )}
       </main>
     </>
   );
