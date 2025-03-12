@@ -17,6 +17,7 @@ interface SearchFilterProps {
  */
 export function SearchFilterComponent({ search, setSearch, setFilterBy }: SearchFilterProps) {
     const [selectedFilter, setSelectedFilter] = useState("Filter");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     function handleFilterChange(filter: "title" | "author" | "state" | "rating") {
         setFilterBy(filter);
@@ -39,9 +40,11 @@ export function SearchFilterComponent({ search, setSearch, setFilterBy }: Search
             <div className="dropdown">
                 <select
                     data-testid="filterBtn"
-                    className="filterBtn"
+                    className={`filterBtn ${isDropdownOpen ? 'open' : ''}`}
                     value={selectedFilter}
                     onChange={(e) => handleFilterChange(e.target.value as "title" | "author" | "state" | "rating")}
+                    onFocus={() => setIsDropdownOpen(true)} // Set dropdown as open when focused
+                    onBlur={() => setIsDropdownOpen(false)} // Set dropdown as closed when focus is lost
                 >
                     <option value="title">Title</option>
                     <option value="author">Author</option>
