@@ -16,9 +16,13 @@ function Profile() {
         }
     }
 
+    const handleHeaderClick = () => {
+        navigate("/home");
+    }
+
     return (
         <>
-            <Header />
+            <Header onClick={handleHeaderClick} />
             <div className="profileContainer">
                 <h1 className="profileHeader">Profile</h1>
                 <div className="userName">
