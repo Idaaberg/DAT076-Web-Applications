@@ -16,13 +16,11 @@ interface SearchFilterProps {
  * @returns SearchFilter component
  */
 export function SearchFilterComponent({ search, setSearch, setFilterBy }: SearchFilterProps) {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState("Filter");
 
     function handleFilterChange(filter: "title" | "author" | "state" | "rating") {
         setFilterBy(filter);
-        setSelectedFilter(filter.charAt(0).toUpperCase() + filter.slice(1));
-        setDropdownOpen(false);
+        setSelectedFilter(filter);
     }
 
     return (
@@ -38,25 +36,18 @@ export function SearchFilterComponent({ search, setSearch, setFilterBy }: Search
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </form>
-
             <div className="dropdown">
-                <button
+                <select
                     data-testid="filterBtn"
                     className="filterBtn"
-                    type="button"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    value={selectedFilter}
+                    onChange={(e) => handleFilterChange(e.target.value as "title" | "author" | "state" | "rating")}
                 >
-                    {selectedFilter}
-                </button>
-
-                {dropdownOpen && (
-                    <ul className="dropdownMenu">
-                        <li><button onClick={() => handleFilterChange("title")}>Title</button></li>
-                        <li><button onClick={() => handleFilterChange("author")}>Author</button></li>
-                        <li><button onClick={() => handleFilterChange("state")}>State</button></li>
-                        <li><button onClick={() => handleFilterChange("rating")}>Rating</button></li>
-                    </ul>
-                )}
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="state">Status</option>
+                    <option value="rating">Rating</option>
+                </select>
             </div>
         </div>
     );

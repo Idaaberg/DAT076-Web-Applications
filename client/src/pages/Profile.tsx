@@ -35,7 +35,7 @@ function Profile() {
                     </button>
                     <a href="/home">
                         <button className="backBtn" type="button">
-                            Cancel
+                            Back
                         </button>
                     </a>
                 </div>

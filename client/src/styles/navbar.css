@@ -45,11 +45,25 @@ nav {
     padding-right: 1rem;
 }
 
-.addBtn, .filterBtn, .profileBtn {
+.filterBtn {
+    background-color: transparent; 
+    border: 1px solid #ffffff(0, 0%, 100%); /* Same border */
+    color: #ffffff; 
+    padding: 8px 16px; /* Adjust padding */
+    font-size: 1rem; /* Adjust font size */
+    border-radius: 10px; /* Rounded edges */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
+
+
+.addBtn, .filterBtn, .profileBtn{
     border-color: #faebfc;
 }
 
-.addBtn:hover, .profileBtn:hover, .filterBtn:hover {
+.addBtn:hover, .profileBtn:hover, .filterBtn:hover{
     background-color: #faebfc;
     color: #282424;
 }
@@ -59,3 +73,4 @@ nav {
     align-items: center;
     gap: 10px;
 }
+
