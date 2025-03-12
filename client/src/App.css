@@ -26,22 +26,33 @@ ul {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
   color: #000000;
   min-width: 100vh;
+  text-align: center;
+} 
+
+.headerInfo{
+  flex: 1;
 }
 
 .bookShelfHeader {
   font-weight: bold;
-  padding: 5px;
   background-color: #e5cae3;
 }
 
 .book-image {
-  margin-left: 40px;
+  width: 100px;
+  height: 150px;
+  flex: 1;
 }
 
 .book-info {
   display: flex;
-  flex-grow: 1;
   padding: 30px;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
+}
+
+.infoDiv{
+  flex: 1;
+  text-wrap: wrap;
 }
