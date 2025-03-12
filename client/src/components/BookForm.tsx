@@ -114,6 +114,12 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
             <a href="/home">
               {isEditing ? <DeleteButton bookId={book.id} /> : <button className="cancelBtn" type="button">Cancel</button>}
             </a>
+            {isEditing ? (
+              <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("editSuccess", "true")}>Save Changes</button>
+
+            ) : (
+              <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("bookAdded", "true")}>Submit</button>
+            )}
           </div>
         </form>
       </main>

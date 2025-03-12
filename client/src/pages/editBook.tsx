@@ -35,9 +35,6 @@ function EditBook() {
         updatedBook.rating ?? undefined, 
         updatedBook.comment
     );
-
-    localStorage.setItem("editSuccess", "true");
-    navigate("/");
   };
 
   if (!book) return <div>Loading...</div>;
