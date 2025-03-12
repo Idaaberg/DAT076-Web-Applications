@@ -36,6 +36,10 @@ function Home() {
             setShowPopup(true);
             setMessage("Your book has been added!");
             localStorage.removeItem("bookAdded");
+        } else if (localStorage.getItem("bookDeleted")) {
+            setShowPopup(true);
+            setMessage("Your book has been deleted!");
+            localStorage.removeItem("bookDeleted");
         }
       }, [])
     
