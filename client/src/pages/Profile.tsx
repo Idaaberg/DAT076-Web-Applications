@@ -1,4 +1,5 @@
-import { logout } from "../api";
+import { useEffect, useState } from "react";
+import { getUsername, logout } from "../api";
 import Header from "../components/Header";
 import "../styles/profile.css";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,21 @@ import { useNavigate } from "react-router-dom";
 
 function Profile() {
     const navigate = useNavigate();
+
+    const [username, setUsername] = useState<string>(""); // State to store username
+
+    // Fetch username when the component mounts
+    useEffect(() => {
+        async function fetchUsername() {
+            try {
+                const user = await getUsername(); // Call the API function
+                setUsername(user); // Store username in state
+            } catch (error) {
+                console.error("Error fetching username:", error);
+            }
+        }  
+        fetchUsername();
+    }, []);
 
     const handleLogOut = async () => {
         try {
@@ -23,7 +39,7 @@ function Profile() {
                 <h1 className="profileHeader">Profile</h1>
                 <div className="userName">
                     <p className="userTitle">Username: </p>
-                    <p>Username</p>
+                    <p>{username || "Loading..."}</p> 
                 </div>
                 <div className="passWord">
                     <p className="passTitle">Password: </p>
