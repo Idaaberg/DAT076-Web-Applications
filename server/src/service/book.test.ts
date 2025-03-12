@@ -1,9 +1,10 @@
-import { BookService } from "../service/book";
-import { UserService } from "../service/user";
+import { BookService } from "./book";
+import { UserService } from "./user";
 import { BookState } from "../model/book.interface";
 import { conn } from "../db/conn";
 import { UserModel } from "../db/user.db";
 import { BookModel } from "../db/book.db";
+
 
 beforeAll(async () => {
     await conn.sync({ force: true });
@@ -18,17 +19,14 @@ describe('BookService Tests', () => {
     let userService: UserService;
 
     beforeAll(async () => {
-        // Create UserService and BookService instances
         userService = new UserService();
         bookService = new BookService(userService);
 
-        // Create a mock user in the database for testing
         const user = await UserModel.create({
             username: 'testuser',
             password: 'password',
         });
 
-        // Create some books linked to the mock user
         await BookModel.create({
             title: 'Test Book 1',
             author: 'Author 1',
