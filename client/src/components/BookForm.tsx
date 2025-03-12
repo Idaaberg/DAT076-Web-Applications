@@ -116,14 +116,10 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
               <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("bookAdded", "true")}>Submit</button>
             )}
             {isEditing ?
-              <button className="deleteBtn" type="button" onClick={() => {
-                console.log("Before state update:", popupOpen); // Logs the current state before change
-                setPopupOpen(true);
-                console.log("After state update (Won't show immediately!):", popupOpen);
-              }}>Delete</button>
+              <button className="deleteBtn" type="button" onClick={() => setPopupOpen(true)}>Delete</button>
               :
               <a className="cancelBtn" href="/home">
-                <button className="cancelBtn" type="button">Cancel</button>
+                <button className="cancelBtn" type="button" onClick={() => localStorage.removeItem("bookAdded")}>Cancel</button>
               </a>
             }
           </div>
