@@ -1,8 +1,8 @@
-
 import { conn } from "../db/conn";
 import { UserModel } from "../db/user.db";
-import { UserService } from "../service/user";
+import { UserService } from "./user";
 import bcrypt from "bcrypt";
+
 
 beforeAll(async () => {
     await conn.sync({ force: true });
