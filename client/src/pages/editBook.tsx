@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Book, editBook, getBookById } from '../api';
 import BookForm from '../components/BookForm';
-
+import { useNavigate } from "react-router-dom";
 
 /**
  * Defines the EditBook page
@@ -23,6 +23,8 @@ function EditBook() {
     fetchBook();
   }, [id]);
 
+  const navigate = useNavigate();
+
   const handleEditBook = async (updatedBook: Book) => {
     if (!updatedBook.id) return;
     await editBook(
@@ -33,11 +35,14 @@ function EditBook() {
         updatedBook.rating ?? undefined, 
         updatedBook.comment
     );
+
+    localStorage.setItem("editSuccess", "true");
+    navigate("/");
   };
 
   if (!book) return <div>Loading...</div>;
 
-  return <BookForm initialBook={book} onSubmit={handleEditBook} isEditing />;
+  return (<BookForm initialBook={book} onSubmit={handleEditBook} isEditing />);
 }
 
 export default EditBook;

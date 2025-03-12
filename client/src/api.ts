@@ -12,9 +12,9 @@ export type Book = {
 }
 
 export enum BookState {
-    HaveRead = "Have Read",
-    WantToRead = "Want to Read",
-    Reading = "Reading",
+  HaveRead = "Have Read",
+  WantToRead = "Want to Read",
+  Reading = "Reading",
 }
 
 const BASE_URL = "http://localhost:8080"
@@ -113,4 +113,9 @@ export async function checkUsernameExists(username: string): Promise<boolean> {
     console.error("Error checking username existence:", error);
     return false;
   }
+}
+
+export async function getUsername(): Promise<string> {
+  const response = await axios.get(`${BASE_URL}/user`);
+  return response.data.username;
 }

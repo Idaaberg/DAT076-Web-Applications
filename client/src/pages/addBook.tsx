@@ -16,6 +16,8 @@ function AddBook() {
       book.rating ?? undefined, 
       book.comment
     );
+
+    localStorage.setItem("bookAdded", "true");
   };
 
   return <BookForm onSubmit={handleAddBook} />;
