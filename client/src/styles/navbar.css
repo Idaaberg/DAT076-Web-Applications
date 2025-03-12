@@ -3,6 +3,15 @@ nav {
     top: 0;
 }
 
+.headerText {
+    padding-top: 25px;  /* Add padding to the top */
+}
+
+.headerText:hover {
+    color: #faebfc; /* Change color on hover */
+}
+
+
 .bar {
     border: 1px solid #ffffff; 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -46,18 +55,50 @@ nav {
 }
 
 .filterBtn {
-    background-color: transparent; 
+    align-items: center;
     border: 1px solid #ffffff(0, 0%, 100%); /* Same border */
     color: #ffffff; 
     padding: 8px 16px; /* Adjust padding */
-    font-size: 1rem; /* Adjust font size */
+    font-size: 1.01rem; /* Adjust font size */
+    font-weight: 500; /* Bold font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Change font */
+    letter-spacing: 0.2px; /* Adjust letter spacing */
     border-radius: 10px; /* Rounded edges */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
+    height: 42.4px;
+    background-color:#1a1a1a; 
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M7 10l5 5 5-5z"/></svg>'); 
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 30px; /* Space for arrow */   
 }
 
+/* Keep the button styled while focused */
+/* Hover and focus states */
+.filterBtn:hover, .filterBtn:focus {
+    background-color: #faebfc;
+    color: #282424;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>'); /* Change arrow to black */
+}
 
+/* Default state (background stays black, no hover or focus effect) */
+.filterBtn:not(:hover):not(:focus) {
+    background-color: #1a1a1a;
+    color: white;
+}
 
+* Keep the hover effect even when the dropdown is open */
+.filterBtn.open, .filterBtn:hover {
+    background-color: #faebfc;
+    color: #282424;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M7 10l5 5 5-5z"/></svg>');
+
+}
 
 .addBtn, .filterBtn, .profileBtn{
     border-color: #faebfc;
@@ -65,6 +106,7 @@ nav {
 
 .addBtn:hover, .profileBtn:hover, .filterBtn:hover{
     background-color: #faebfc;
+    border-color: #faebfc;
     color: #282424;
 }
 

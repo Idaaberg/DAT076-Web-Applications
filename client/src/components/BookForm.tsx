@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { RatingComponent } from "./Rating";
-import HomeIcon from "@mui/icons-material/Home";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "./DeletePopup";
@@ -44,12 +43,16 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
     }
   };
 
+  const handleHeaderClick = () => {
+    navigate("/home");
+}
+
   return (
     <>
       <header>
-        <a href="/home">
-          <HomeIcon className="homeIcon" sx={{ color: "#ff69b4" }} fontSize="large" />
-        </a>
+        <h3 className="headerText" onClick={handleHeaderClick} style={{ cursor: 'pointer' }}>
+          BookShelf
+        </h3>
         <h2 className="addBookHeader">{isEditing ? "Edit Book" : "Add Book"}</h2>
       </header>
       <main className="addBookMain">

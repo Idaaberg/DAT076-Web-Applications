@@ -36,6 +36,7 @@
 
 .logOutBtn:hover {
     background-color: #fa53b4; 
+    border-color: #faebfc;
     color: white;
     transition: background-color 0.3s ease;
 }
@@ -48,6 +49,7 @@
 
 .backBtn:hover {
     background-color: #24282c; 
+    border-color: #faebfc;
     color: white;
     transition: background-color 0.3s ease;
 }

@@ -9,14 +9,13 @@ main {
 }
 
 .headerText {
-    position: top;
     max-height: 100%;
     font-size: 1.5em;
     color: #ffffff;
     text-decoration: none;
-    padding-left: 1rem;
-    padding-top: 1rem;
+    padding-left: 1.1rem;
     margin: 0px;
+    max-width: 8%;
 }
 
 .loginInput {
