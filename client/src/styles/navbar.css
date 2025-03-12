@@ -3,6 +3,15 @@ nav {
     top: 0;
 }
 
+.headerText {
+    padding-top: 25px;  /* Add padding to the top */
+}
+
+.headerText:hover {
+    color: #faebfc; /* Change color on hover */
+}
+
+
 .bar {
     border: 1px solid #ffffff; 
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
