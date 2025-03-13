@@ -5,6 +5,7 @@ import AddBook from './pages/AddBook';
 import EditBook from './pages/EditBook';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/add" element={<AddBook />} />
       <Route path="/edit/:id" element={<EditBook />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

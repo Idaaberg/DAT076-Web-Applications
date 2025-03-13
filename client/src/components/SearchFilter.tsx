@@ -1,20 +1,27 @@
 import { useState } from "react";
 import "../styles/search-filter.css";
 
+
 interface SearchFilterProps {
     search: string;
     setSearch: (value: string) => void;
     setFilterBy: (filter: "title" | "author" | "state" | "rating") => void;
 }
 
+/**
+ * Defines the SearchFilter component
+ * @param search - the search string
+ * @param setSearch - the function to set the search string
+ * @param setFilterBy - the function to set the filter
+ * @returns SearchFilter component
+ */
 export function SearchFilterComponent({ search, setSearch, setFilterBy }: SearchFilterProps) {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
     const [selectedFilter, setSelectedFilter] = useState("Filter");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     function handleFilterChange(filter: "title" | "author" | "state" | "rating") {
         setFilterBy(filter);
-        setSelectedFilter(filter.charAt(0).toUpperCase() + filter.slice(1));
-        setDropdownOpen(false);
+        setSelectedFilter(filter);
     }
 
     return (
@@ -29,28 +36,21 @@ export function SearchFilterComponent({ search, setSearch, setFilterBy }: Search
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
-                {/* TODO is this button needed? */}
-                <button className="searchBtn" type="button">Search</button> 
             </form>
-
             <div className="dropdown">
-                <button
+                <select
                     data-testid="filterBtn"
-                    className="filterBtn"
-                    type="button"
-                    onClick={() => setDropdownOpen(!dropdownOpen)}
+                    className={`filterBtn ${isDropdownOpen ? 'open' : ''}`}
+                    value={selectedFilter}
+                    onChange={(e) => handleFilterChange(e.target.value as "title" | "author" | "state" | "rating")}
+                    onFocus={() => setIsDropdownOpen(true)} // Set dropdown as open when focused
+                    onBlur={() => setIsDropdownOpen(false)} // Set dropdown as closed when focus is lost
                 >
-                    {selectedFilter}
-                </button>
-
-                {dropdownOpen && (
-                    <ul className="dropdownMenu">
-                        <li><button onClick={() => handleFilterChange("title")}>Title</button></li>
-                        <li><button onClick={() => handleFilterChange("author")}>Author</button></li>
-                        <li><button onClick={() => handleFilterChange("state")}>State</button></li>
-                        <li><button onClick={() => handleFilterChange("rating")}>Rating</button></li>
-                    </ul>
-                )}
+                    <option value="title">Title</option>
+                    <option value="author">Author</option>
+                    <option value="state">Status</option>
+                    <option value="rating">Rating</option>
+                </select>
             </div>
         </div>
     );

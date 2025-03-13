@@ -9,7 +9,7 @@ import { userRouter } from "./router/user";
 
 export const app = express();
 
-dotenv.config({ path:__dirname + "/.env" }); 
+dotenv.config(); 
 if (! process.env.SESSION_SECRET) {
   console.log("Could not find SESSION_SECRET in .env file");
   process.exit();

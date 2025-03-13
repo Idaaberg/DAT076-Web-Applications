@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { RatingComponent } from "./Rating";
-import HomeIcon from "@mui/icons-material/Home";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
+import { DeletePopup } from "./DeletePopup";
+import Header from "./Header";
+
 
 interface BookFormProps {
   initialBook?: Book;
@@ -10,6 +12,13 @@ interface BookFormProps {
   isEditing?: boolean;
 }
 
+/**
+ * Defines the BookForm component
+ * @param initialBook - the initial book
+ * @param onSubmit - the function to submit the book
+ * @param isEditing - the boolean to check if in editing mode
+ * @returns BookForm component
+ */
 const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = false }) => {
   const [book, setBook] = useState<Book>(
     initialBook || {
@@ -23,6 +32,7 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
   );
 
   const navigate = useNavigate();
+  const [popupOpen, setPopupOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,12 +44,11 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
     }
   };
 
+
   return (
     <>
       <header>
-        <a href="/home">
-          <HomeIcon className="homeIcon" sx={{ color: "#ff69b4" }} fontSize="large" />
-        </a>
+        <Header/>
         <h2 className="addBookHeader">{isEditing ? "Edit Book" : "Add Book"}</h2>
       </header>
       <main className="addBookMain">
@@ -73,8 +82,8 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
               onChange={(e) => setBook({ ...book, state: e.target.value as BookState })}
               required
             >
-              <option value={BookState.HaveRead}>Finished Reading</option>
-              <option value={BookState.Reading}>Currently Reading</option>
+              <option value={BookState.HaveRead}>Have Read</option>
+              <option value={BookState.Reading}>Reading</option>
               <option value={BookState.WantToRead}>Want to Read</option>
             </select>
           </div>
@@ -99,16 +108,24 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
           </div>
 
           <div className="buttonGroup">
-            <button className="submitBtn" type="submit">
-              {isEditing ? "Save Changes" : "Submit"}
-            </button>
-            <a href="/home">
-              <button className="cancelBtn" type="button">
-                Cancel
-              </button>
-            </a>
+            {isEditing ? (
+              <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("editSuccess", "true")}>Save Changes</button>
+
+            ) : (
+              <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("bookAdded", "true")}>Submit</button>
+            )}
+            {isEditing ?
+              <button className="popBtn" type="button" onClick={() => setPopupOpen(true)}>Delete</button>
+              :
+              <a className="cancelBtn" href="/home">
+                <button className="cancelBtn" type="button" onClick={() => localStorage.removeItem("bookAdded")}>Cancel</button>
+              </a>
+            }
           </div>
         </form>
+        {popupOpen && (
+          <DeletePopup bookId={book.id} setPopupOpen={setPopupOpen} />
+        )}
       </main>
     </>
   );

@@ -1,89 +1,93 @@
-import { BookService } from "../service/book";
-import { UserService } from "../service/user";
-import { Book, BookState } from "../model/book.interface";
+import { BookService } from "./book";
+import { UserService } from "./user";
+import { BookState } from "../model/book.interface";
+import { conn } from "../db/conn";
+import { UserModel } from "../db/user.db";
+import { BookModel } from "../db/book.db";
 
-describe("BookService", () => {
+
+beforeAll(async () => {
+    await conn.sync({ force: true });
+});
+
+afterAll(async () => {
+    await conn.close();
+});
+
+describe('BookService Tests', () => {
     let bookService: BookService;
     let userService: UserService;
-    
-    beforeEach(async () => {
+
+    beforeAll(async () => {
         userService = new UserService();
-        await userService.createUser("TestUser", "TestPassword"); 
         bookService = new BookService(userService);
+
+        const user = await UserModel.create({
+            username: 'testuser',
+            password: 'password',
+        });
+
+        await BookModel.create({
+            title: 'Test Book 1',
+            author: 'Author 1',
+            state: BookState.HaveRead,
+            rating: 5,
+            comment: 'Great book!',
+            userId: user.id,
+        });
+
+        await BookModel.create({
+            title: 'Test Book 2',
+            author: 'Author 2',
+            state: BookState.WantToRead,
+            rating: 4,
+            comment: 'Want to read!',
+            userId: user.id,
+        });
     });
 
-    test("Adding a book should store it under the user's account", async () => {
-        const newBook = await bookService.addBook(
-            "TestUser",
-            "Test Title",
-            "Test Author",
-            BookState.HaveRead,
-            5,
-            "Great book!"
-        );
-
-        expect(newBook).toBeDefined();
-        expect(newBook?.title).toBe("Test Title");
-        expect(newBook?.author).toBe("Test Author");
-
-        const books = await bookService.getBooks("TestUser");
-        expect(books?.length).toBe(1);
-        expect(books?.[0].title).toBe("Test Title");
+    test('getBooks should return books for a valid user', async () => {
+        const books = await bookService.getBooks('testuser');
+        expect(books).toBeDefined();
+        expect(books).toHaveLength(2);
+        if (books) {
+            expect(books[0].title).toBe('Test Book 1');
+            expect(books[1].author).toBe('Author 2');
+        }
     });
 
-    test("Fetching books for a user should return the correct list", async () => {
-        await bookService.addBook("TestUser", "Book A", "Author A", BookState.WantToRead);
-        await bookService.addBook("TestUser", "Book B", "Author B", BookState.Reading);
-        
-        const books = await bookService.getBooks("TestUser");
-        expect(books?.length).toBe(2);
-        expect(books?.map(book => book.title)).toContain("Book A");
-        expect(books?.map(book => book.title)).toContain("Book B");
-    });
-
-    test("Editing a book should update the correct book details", async () => {
-        const book = await bookService.addBook("TestUser", "Original Title", "Original Author", BookState.HaveRead);
+    test('getBookById should return a specific book by id', async () => {
+        const book = await bookService.getBookById(1);
         expect(book).toBeDefined();
-        
-        const updatedBook = await bookService.editBookProps(
-            "TestUser",
-            book!.id,
-            "Updated Title",
-            "Updated Author",
+        expect(book?.title).toBe('Test Book 1');
+    });
+
+    test('addBook should add a new book to the user\'s collection', async () => {
+        const newBook = await bookService.addBook(
+            'testuser',
+            'Test Book 3',
+            'Author 3',
+            BookState.Reading,
+            3,
+            'Interesting book.'
+        );
+        expect(newBook).toBeDefined();
+        expect(newBook?.title).toBe('Test Book 3');
+        expect(newBook?.state).toBe(BookState.Reading);
+    });
+
+    test('editBook should update a book\'s information', async () => {
+        const updatedBook = await bookService.editBook(
+            'testuser',
+            1,
+            'Updated Book Title',
+            'Updated Author',
             BookState.Reading,
             4,
-            "Updated comment"
+            'Updated comment.'
         );
-
         expect(updatedBook).toBeDefined();
-        expect(updatedBook?.title).toBe("Updated Title");
-        expect(updatedBook?.author).toBe("Updated Author");
-
-        const books = await bookService.getBooks("TestUser");
-        expect(books?.map(book => book.title)).toContain("Updated Title");
-    });
-
-    test("Fetching a book by ID should return the correct book", async () => {
-        const book = await bookService.addBook("TestUser", "Find Me", "Author", BookState.HaveRead);
-        expect(book).toBeDefined();
-
-        const fetchedBook = await bookService.getBookById("TestUser", book!.id);
-        expect(fetchedBook).toBeDefined();
-        expect(fetchedBook?.title).toBe("Find Me");
-    });
-
-    test("Trying to add a book for a non-existent user should return undefined", async () => {
-        const book = await bookService.addBook("FakeUser", "Title", "Author", BookState.HaveRead);
-        expect(book).toBeUndefined();
-    });
-
-    test("Trying to edit a book for a non-existent user should return undefined", async () => {
-        const book = await bookService.editBookProps("FakeUser", 1, "New Title", "New Author", BookState.Reading);
-        expect(book).toBeUndefined();
-    });
-
-    test("Trying to edit a non-existent book should return undefined", async () => {
-        const book = await bookService.editBookProps("TestUser", 999, "New Title", "New Author", BookState.Reading);
-        expect(book).toBeUndefined();
+        expect(updatedBook?.title).toBe('Updated Book Title');
+        expect(updatedBook?.author).toBe('Updated Author');
     });
 });

@@ -1,0 +1,55 @@
+.profileContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding-top: 10px;
+}
+
+.profileHeader {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profileHeader, .userTitle, .passTitle {
+    color: #ff83cb !important;
+}
+
+.userName, .passWord, .buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 20%;
+}
+
+.buttons {
+    margin-top: 10px;
+}
+
+.logOutBtn {
+    background-color: #ff83cb; 
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.logOutBtn:hover {
+    background-color: #fa53b4; 
+    border-color: #faebfc;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.backBtn {
+    background-color: #343a40; 
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.backBtn:hover {
+    background-color: #24282c; 
+    border-color: #faebfc;
+    color: white;
+    transition: background-color 0.3s ease;
+}

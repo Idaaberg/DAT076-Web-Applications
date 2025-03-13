@@ -8,15 +8,18 @@ main {
     position: top;
 }
 
+.authHeader{
+    padding-left: 1rem;
+}
+
 .headerText {
-    position: top;
     max-height: 100%;
     font-size: 1.5em;
     color: #ffffff;
     text-decoration: none;
-    padding-left: 1rem;
-    padding-top: 1rem;
+    padding-left: 1.1rem;
     margin: 0px;
+    max-width: 8%;
 }
 
 .loginInput {
@@ -71,11 +74,19 @@ main {
     color: #ff83cb;
     display: flex;
     justify-content: center;
-    background-color: #282424;
+    background-color: #242424;
 }
 
 .cancelBtn:hover {
     color: #fa53b4;
-    background-color: #282424;
+    background-color: #242424;
     text-decoration: underline;
 }
+
+.error {
+    color: red;
+}
+
+.inputError {
+    border: 1px solid red !important; 
+  }
