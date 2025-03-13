@@ -32,13 +32,8 @@ function Profile() {
         }
     }
 
-    const handleHeaderClick = () => {
-        navigate("/home");
-    }
-
     return (
         <>
-            <Header onClick={handleHeaderClick} />
             <Header />
             <div className="profileContainer">
                 <h1 className="profileHeader">Profile</h1>

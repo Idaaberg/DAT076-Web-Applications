@@ -44,16 +44,10 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
     }
   };
 
-  const handleHeaderClick = () => {
-    navigate("/home");
-}
 
   return (
     <>
       <header>
-        <h3 className="headerText" onClick={handleHeaderClick} style={{ cursor: 'pointer' }}>
-          BookShelf
-        </h3>
         <Header/>
         <h2 className="addBookHeader">{isEditing ? "Edit Book" : "Add Book"}</h2>
       </header>
@@ -88,8 +82,6 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
               onChange={(e) => setBook({ ...book, state: e.target.value as BookState })}
               required
             >
-              <option value={BookState.HaveRead}>Finished Reading</option>
-              <option value={BookState.Reading}>Currently Reading</option>
               <option value={BookState.HaveRead}>Have Read</option>
               <option value={BookState.Reading}>Reading</option>
               <option value={BookState.WantToRead}>Want to Read</option>
@@ -123,7 +115,7 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
               <button className="submitBtn" type="submit" onClick={() => localStorage.setItem("bookAdded", "true")}>Submit</button>
             )}
             {isEditing ?
-              <button className="deleteBtn" type="button" onClick={() => setPopupOpen(true)}>Delete</button>
+              <button className="popBtn" type="button" onClick={() => setPopupOpen(true)}>Delete</button>
               :
               <a className="cancelBtn" href="/home">
                 <button className="cancelBtn" type="button" onClick={() => localStorage.removeItem("bookAdded")}>Cancel</button>

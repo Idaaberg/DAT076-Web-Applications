@@ -86,15 +86,21 @@
     transition: background-color 0.3s ease;
 }
 
-.cancelBtn, .deleteBtn {
+.cancelBtn, .popBtn {
     background-color: #343a40; 
     color: white;
     transition: background-color 0.3s ease;
     flex: 1;
 }
 
-.deleteBtn {
+.popBtn {
     background-color: #ff4d4d; 
+}
+
+.popBtn:hover {
+    background-color: rgb(157, 3, 3);  
+    color: white;
+    transition: background-color 0.3s ease;
 }
 
 .cancelBtn:hover {

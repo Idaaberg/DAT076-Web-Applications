@@ -31,7 +31,7 @@
     margin-top: 15px; 
   }
   
-  .cancelDeleteBtn, .popBtn {
+  .cancelDeleteBtn, .deleteBtn {
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 16px;
@@ -40,13 +40,13 @@
   }
   
   
-.popBtn {
+.deleteBtn {
     background-color: #ff4d4d; 
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.popBtn:hover {
+.deleteBtn:hover {
   background-color: rgb(157, 3, 3);  
   color: white;
   transition: background-color 0.3s ease;
