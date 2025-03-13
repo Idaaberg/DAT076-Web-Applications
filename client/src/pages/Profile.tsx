@@ -8,14 +8,13 @@ import { useNavigate } from "react-router-dom";
 function Profile() {
     const navigate = useNavigate();
 
-    const [username, setUsername] = useState<string>(""); // State to store username
+    const [username, setUsername] = useState<string>(""); 
 
-    // Fetch username when the component mounts
     useEffect(() => {
         async function fetchUsername() {
             try {
-                const user = await getUsername(); // Call the API function
-                setUsername(user); // Store username in state
+                const user = await getUsername(); 
+                setUsername(user); 
             } catch (error) {
                 console.error("Error fetching username:", error);
             }
