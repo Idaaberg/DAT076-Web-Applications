@@ -18,13 +18,8 @@ export function bookRouter(bookService: IBookService): Router {
                 res.status(401).send("Not logged in");
                 return;
             }
-            const bookShelf: Book[] | undefined = await bookService.getBooks(req.session.username);
-            if (!bookShelf) {
-                console.log("User logged in as " + req.session.username + " no longer exists");
-                delete req.session.username;
-                res.status(401).send("Not logged in");
-                return;
-            }
+            const bookShelf: Book[] | undefined = await bookService.getBooks(req.session.username) || [];
+            
             res.status(200).send(bookShelf);
         } catch (e: any) {
             res.status(500).send(e.message);
@@ -50,9 +45,7 @@ export function bookRouter(bookService: IBookService): Router {
             const book: Book | undefined = await bookService.getBookById(id);
             res.status(200).send(book);
             if (!book) {
-                console.log("User logged in as " + req.session.username + " no longer exists");
-                delete req.session.username;
-                res.status(401).send("Not logged in");
+                res.status(404).send("Book with the given ID does not exist");
                 return;
             }
         } catch (e: any) {
