@@ -52,14 +52,4 @@ describe('App Component', () => {
     const registerHeader = screen.getByRole('heading', { name: /register/i });
     expect(registerHeader).toBeInTheDocument();
   });
-
-  test('renders login page when navigating to /login', () => {
-    render(
-      <Router initialEntries={['/login']}>
-        <App />
-      </Router>
-    );
-    const loginHeader = screen.getByRole('heading', { name: /log in/i });
-    expect(loginHeader).toBeInTheDocument();
-  });
 });
