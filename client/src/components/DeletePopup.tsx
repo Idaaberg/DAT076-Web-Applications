@@ -27,7 +27,7 @@ export function DeletePopup({ bookId, setPopupOpen }: DeletePopupProps) {
                     <button className="cancelDeleteBtn" type="button" onClick={() => setPopupOpen(false)}>
                         Cancel
                     </button>
-                    <button className="deleteBtn" onClick={() => {
+                    <button className="popBtn" onClick={() => {
                         localStorage.setItem("bookDeleted", "true");
                         handleDelete();}
                     }>Delete Book</button>

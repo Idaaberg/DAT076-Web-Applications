@@ -31,23 +31,29 @@
     margin-top: 15px; 
   }
   
-  .cancelDeleteBtn, .deleteBtn {
+  .cancelDeleteBtn, .popBtn {
     padding: 10px 15px;
     border-radius: 5px;
     font-size: 16px;
+    border: none;
     flex: 1;
   }
   
   
-.deleteBtn {
-    background-color: rgb(159, 0, 0);
-    border: 2px solid black;
+.popBtn {
+    background-color: #ff4d4d; 
     color: white;
     transition: background-color 0.3s ease;
 }
 
-.deleteBtn:hover {
-    background-color: rgb(157, 3, 3);  
+.popBtn:hover {
+  background-color: rgb(157, 3, 3);  
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.cancelDeleteBtn:hover {
+    background-color: #24282c; 
     color: white;
     transition: background-color 0.3s ease;
 }
