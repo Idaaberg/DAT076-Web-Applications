@@ -80,9 +80,7 @@ export function bookRouter(bookService: IBookService): Router {
             }
             const newBook: Book | undefined = await bookService.addBook(req.session.username, title, author, state, rating, comment);
             if (!newBook) {
-                console.log("User logged in as " + req.session.username + " no longer exists");
-                delete req.session.username;
-                res.status(401).send("Not logged in");
+                res.status(500).send("Error adding the book.");
                 return;
             }
             res.status(201).send(newBook);
