@@ -90,6 +90,8 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
             >
               <option value={BookState.HaveRead}>Finished Reading</option>
               <option value={BookState.Reading}>Currently Reading</option>
+              <option value={BookState.HaveRead}>Have Read</option>
+              <option value={BookState.Reading}>Reading</option>
               <option value={BookState.WantToRead}>Want to Read</option>
             </select>
           </div>
