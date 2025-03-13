@@ -1,92 +1,125 @@
 import '@testing-library/jest-dom';
 import Home from '../pages/Home';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import axios from 'axios';
 
+jest.mock('axios');
 
 describe('A Home Component', () => {
-    test('renders the add button', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
 
-        const button = screen.getByRole('button', { name: "Add Book" });
+    test('renders the add button', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
+        
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const button = await screen.findByRole('button', { name: "Add Book" });
         expect(button).toBeInTheDocument();
     });
 
-    test('renders empty message initially', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    test('renders empty message initially', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
 
-        const emptyMsg = screen.getByText("No books found");
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const emptyMsg = await screen.findByText("No books found");
         expect(emptyMsg).toBeInTheDocument();
     });
 
-    test('renders the search bar', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    test('renders the search bar', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
 
-        const search = screen.getByPlaceholderText("Search");
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const search = await screen.findByPlaceholderText("Search");
         expect(search).toBeInTheDocument();
     });
 
-    test('render the logo', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    test('renders the logo', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
 
-        const logo = screen.getByText("BookShelf");
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const logo = await screen.findByText("BookShelf");
         expect(logo).toBeInTheDocument();
     });
 
-    test('clicking the add button opens the add book form', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    test('clicking the add button opens the add book form', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
 
-        const button = screen.getByRole('button', { name: "Add Book" });
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const button = await screen.findByRole('button', { name: "Add Book" });
         fireEvent.click(button);
 
-        const form = screen.getByText("Add Book");
+        const form = await screen.findByText("Add Book");
         expect(form).toBeInTheDocument();
     });
 
-    test('writing in the search bar updates the search value', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
-        const search = screen.getByPlaceholderText("Search");
+    test('writing in the search bar updates the search value', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
+
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const search = await screen.findByPlaceholderText("Search");
         fireEvent.change(search, { target: { value: "test" } });
+
         expect(search).toHaveValue("test");
-        expect(search).not.toHaveValue("test2");
     });
 
-    test('selecting a filter updates the filter value', () => {
-        render(
-            <MemoryRouter >
-                <Home />
-            </MemoryRouter>
-        );
+    test('selecting a filter updates the filter value', async () => {
+        (axios.get as jest.Mock).mockResolvedValueOnce({ data: [] });
 
-        const select = screen.getByTestId('filterBtn');
+        await act(async () => {
+            render(
+                <MemoryRouter>
+                    <Home />
+                </MemoryRouter>
+            );
+        });
+
+        const select = await screen.findByTestId('filterBtn');
         fireEvent.change(select, { target: { value: "author" } });
+
         expect(select).toHaveValue("author");
-        expect(select).not.toHaveValue("rating");
-        expect(select).not.toHaveValue("state");
-        expect(select).not.toHaveValue("title");
     });
 });

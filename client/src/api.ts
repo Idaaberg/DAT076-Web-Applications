@@ -108,7 +108,13 @@ export async function logout(): Promise<void> {
 export async function checkUsernameExists(username: string): Promise<boolean> {
   try {
     const response = await axios.get(`${BASE_URL}/user/exists?username=${username}`);
-    return response.data.exists;
+    
+    if (response && response.data && typeof response.data.exists === 'boolean') {
+      return response.data.exists;
+    } else {
+      console.error("Unexpected response structure:", response);
+      return false;
+    }
   } catch (error) {
     console.error("Error checking username existence:", error);
     return false;
