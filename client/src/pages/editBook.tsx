@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Book, editBook, getBookById } from '../api';
 import BookForm from '../components/BookForm';
-import { useNavigate } from "react-router-dom";
+
 
 /**
  * Defines the EditBook page
@@ -22,8 +22,6 @@ function EditBook() {
     }
     fetchBook();
   }, [id]);
-
-  const navigate = useNavigate();
 
   const handleEditBook = async (updatedBook: Book) => {
     if (!updatedBook.id) return;
