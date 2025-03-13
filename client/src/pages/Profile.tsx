@@ -39,6 +39,7 @@ function Profile() {
     return (
         <>
             <Header onClick={handleHeaderClick} />
+            <Header />
             <div className="profileContainer">
                 <h1 className="profileHeader">Profile</h1>
                 <div className="userName">

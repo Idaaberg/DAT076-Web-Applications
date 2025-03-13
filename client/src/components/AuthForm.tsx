@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../styles/login.css";
 import { Errors } from "../types/types";
-import Header from "./Header";
 
 
 interface AuthFormProps {
@@ -38,7 +37,11 @@ function AuthForm({ title, buttonText, onSubmit, linkText, linkTo, errors }: Aut
 
     return (
         <>
-            <Header />
+            <header>
+                <h2 className="authHeader">
+                    BookShelf
+                </h2>
+            </header>
             <main>
                 <h1 className="loginHeader">{title}</h1>
                 <form className="form" onSubmit={handleSubmit}>

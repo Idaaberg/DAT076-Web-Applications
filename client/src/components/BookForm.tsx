@@ -3,6 +3,7 @@ import { RatingComponent } from "./Rating";
 import { Book, BookState } from "../api";
 import { useNavigate } from "react-router-dom";
 import { DeletePopup } from "./DeletePopup";
+import Header from "./Header";
 
 
 interface BookFormProps {
@@ -53,6 +54,7 @@ const BookForm: React.FC<BookFormProps> = ({ initialBook, onSubmit, isEditing = 
         <h3 className="headerText" onClick={handleHeaderClick} style={{ cursor: 'pointer' }}>
           BookShelf
         </h3>
+        <Header/>
         <h2 className="addBookHeader">{isEditing ? "Edit Book" : "Add Book"}</h2>
       </header>
       <main className="addBookMain">
