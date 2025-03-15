@@ -3,6 +3,7 @@ import { checkUsernameExists, register } from "../api";
 import AuthForm from "../components/AuthForm";
 import { useNavigate } from "react-router-dom";
 import { Errors } from "../types/types";
+import SuccessPopup from "../components/SuccessPopup";
 
 
 /**
@@ -12,6 +13,7 @@ import { Errors } from "../types/types";
 function Register() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<Errors>({});
+    const [showSuccess, setShowSuccess] = useState(false);
 
     const handleRegister = async (username: string, password: string) => {
         let newErrors: Errors = {};
@@ -35,21 +37,29 @@ function Register() {
 
         try {
             await register(username, password);
-            navigate("/login");
+            setShowSuccess(true);
+            setTimeout(() => {
+                navigate("/login");
+            }, 1000);
         } catch (error) {
             console.error("Registration failed:", error);
         }
     };
 
     return (
-        <AuthForm
-            title="Register"
-            buttonText="Register"
-            onSubmit={handleRegister}
-            linkText="Cancel"
-            linkTo="/login"
-            errors={errors}
-        />
+        <>
+            {showSuccess && (
+                <SuccessPopup message="Successfully registered!" onClose={() => setShowSuccess(false)} />
+            )}
+            <AuthForm
+                title="Register"
+                buttonText="Register"
+                onSubmit={handleRegister}
+                linkText="Cancel"
+                linkTo="/login"
+                errors={errors}
+            />
+        </>
     );
 }
 
