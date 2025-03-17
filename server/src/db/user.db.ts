@@ -47,5 +47,5 @@ UserModel.init(
 UserModel.hasMany(BookModel, {
   sourceKey: 'id',
   foreignKey: 'userId',
-  as: 'tasks'
+  as: 'books'
 });
