@@ -69,3 +69,53 @@ Finally, start the application by running the following command in both the clie
 ```
 npm run dev
 ```
+
+## Project Report  
+The project report is available in the `docs` folder:  
+📄 [Web_Application_Report.pdf](docs/Web_Application_Report.pdf)
+
+## Directory Structure
+```
+Dat076-Web-Applications/
+│
+├── client/                    # Frontend code for the application
+│   └── src/                   
+│        ├── components/       
+│        ├── img/              
+│        ├── pages/            
+│        ├── styles/
+│        ├── tests/
+│        ├── types/
+│        ├── api.ts
+│        ├── App.css
+│        ├── App.test.tsx
+│        ├── index.css
+│        └── main.tsx
+│
+├── client_mockups/            # First HTML mockups
+│   └── public
+│        ├── images/ 
+│        ├── addBook.html
+│        ├── index.html
+│        └── main.css           
+│
+├── server/                    # Backend code for the application
+│   └── src/
+│        ├── db/
+│        ├── model/
+│        ├── router/
+│        ├── service/  
+│        ├── index.ts
+│        └── start.ts                
+│
+├── docs/                      # Documentation files, including the project report
+│   └── BookShelf_Project_Report.pdf
+│
+├── .env   
+├── .gitignore                 
+├── jest.config.js
+├── package-lock.json                  
+├── package.json              
+├── README.md                  
+└── tsconfig,json
+```      
