@@ -1,6 +1,12 @@
 import { Sequelize } from 'sequelize';
 import dotenv from "dotenv";
 
+
+/**
+ * This file is responsible for creating the connection to the database.
+ * It uses the Sequelize library to connect to the database.
+ */
+
 export let conn : Sequelize;
 
 dotenv.config();

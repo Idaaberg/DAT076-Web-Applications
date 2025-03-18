@@ -65,6 +65,11 @@ export async function editBook(id: number, title: string, author: string, state:
   return response.data
 }
 
+/**
+ * Deletes a book from the user's bookshelf
+ * @param id - the ID of the book to delete
+ * @returns the deleted book
+ */
 export async function deleteBook(id: number): Promise<boolean> {
   const response = await axios.delete<boolean>(`${BASE_URL}/book/${id}`)
   return response.data
@@ -121,6 +126,10 @@ export async function checkUsernameExists(username: string): Promise<boolean> {
   }
 }
 
+/**
+ * Retrieves the username of the currently logged in user
+ * @returns the username of the current user
+ */
 export async function getUsername(): Promise<string> {
   const response = await axios.get(`${BASE_URL}/user`);
   return response.data.username;

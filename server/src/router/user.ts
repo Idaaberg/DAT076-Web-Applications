@@ -2,6 +2,7 @@ import express, { Request, Response, Router, RequestHandler } from "express";
 import { User } from "../model/user";
 import { IUserService } from "../service/IUserService.interface";
 
+
 interface UserRequest extends Request {
   body: { username: string, password: string },
   session: any
@@ -11,6 +12,9 @@ interface UsernameQuery {
   username: string;
 }
 
+/**
+ * Router for user-related requests
+ */
 export function userRouter(userService: IUserService): Router {
   const userRouter = express.Router();
 

@@ -7,6 +7,11 @@ import dotenv from "dotenv";
 import { UserService } from "./service/user";
 import { userRouter } from "./router/user";
 
+
+/**
+ * The main application
+ */
+
 export const app = express();
 
 dotenv.config(); 
@@ -32,4 +37,3 @@ const bookService = new BookService(userService);
 
 app.use("/user", userRouter(userService));
 app.use("/book", bookRouter(bookService));
-

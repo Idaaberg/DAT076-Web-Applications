@@ -4,7 +4,10 @@ import Header from "../components/Header";
 import "../styles/profile.css";
 import { useNavigate } from "react-router-dom";
 
-
+/**
+ * Displays the user's profile information
+ * @returns Profile component
+ */
 function Profile() {
     const navigate = useNavigate();
 

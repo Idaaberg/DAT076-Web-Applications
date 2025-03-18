@@ -4,6 +4,9 @@ import { IBookService } from "../service/IBookService.interface";
 import { BookService } from "../service/book";
 
 
+/**
+ * Router for book-related requests
+ */
 export function bookRouter(bookService: IBookService): Router {
     const bookRouter = express.Router();
 

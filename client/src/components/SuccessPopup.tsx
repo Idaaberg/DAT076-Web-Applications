@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
 
+
 interface SuccessPopupProps {
   message: string;
   onClose: () => void;
 }
 
+/**
+ * Popup to display success messages
+ * @param message
+ * @param onClose
+ * @returns SuccessPopup component
+ */
 const SuccessPopup: React.FC<SuccessPopupProps> = ({ message, onClose }) => {
   const [fade, setFade] = useState(false);
 

@@ -4,6 +4,10 @@ import { IBookService } from './IBookService.interface';
 import { BookModel } from "../db/book.db";
 import { UserService } from './user';
 
+
+/**
+ * Service for book-related operations
+ */
 export class BookService implements IBookService {
     private userService: UserService;
 
@@ -52,6 +56,11 @@ export class BookService implements IBookService {
         }
     }
 
+    /**
+     * Validates a rating value
+     * @param rating 
+     * @returns true if the rating is valid, false otherwise
+    */
     static validateRating(rating?: number): rating is 1 | 2 | 3 | 4 | 5 | undefined {
         return rating === undefined || [1, 2, 3, 4, 5].includes(Number(rating));
     }

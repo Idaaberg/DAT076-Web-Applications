@@ -2,6 +2,10 @@ import "../styles/navbar.css";
 import { useNavigate } from "react-router-dom";
 
 
+/**
+ * Header component for the application
+ * @returns Header component
+ */
 export default function Header() {
     const navigate = useNavigate();
 

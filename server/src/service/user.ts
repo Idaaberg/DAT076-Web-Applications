@@ -6,6 +6,9 @@ import { UserModel } from "../db/user.db";
 
 const salt = bcrypt.genSaltSync(10);
 
+/**
+ * Service for user-related operations
+ */
 export class UserService implements IUserService {
     /**
      * Creates a new user and encrypts the password

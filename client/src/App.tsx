@@ -7,6 +7,11 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 
+
+/**
+ * The frontend application and its routes
+ * @returns App component
+ */
 function App() {
 
   return (

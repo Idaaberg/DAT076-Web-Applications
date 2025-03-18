@@ -7,6 +7,13 @@ interface DeletePopupProps {
     bookId: number;
     setPopupOpen: (open: boolean) => void;
 }
+
+/**
+ * Popup to confirm deletion of a book
+ * @param bookId
+ * @param setPopupOpen 
+ * @returns DeletePopup component
+ */
 export function DeletePopup({ bookId, setPopupOpen }: DeletePopupProps) {
     const navigate = useNavigate();
 
